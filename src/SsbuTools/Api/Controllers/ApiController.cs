@@ -10,9 +10,9 @@ namespace SsbuTools.Api.Controllers;
 [Produces("application/json")]
 public class ApiController : ControllerBase {
 
-	private IndexService IndexService;
+	private IIndexService IndexService;
 
-	public ApiController(IndexService indexService) {
+	public ApiController(IIndexService indexService) {
 		IndexService = indexService;
 	}
 
