@@ -5,6 +5,8 @@ namespace SsbuTools.Api.Services;
 
 public class IndexService : IIndexService {
 	private ResponseModel _index;
+
+	private readonly string _path = "v1";
 	private string BaseUrl;
 
 	private Dictionary<string, string> _links;
@@ -12,8 +14,8 @@ public class IndexService : IIndexService {
 	public IndexService(ApiConfig config) {
 		BaseUrl = config.BaseUrl;
 		_links = new Dictionary<string, string> {
-		{ "self", BaseUrl + "v1" },
-		{ "stages", BaseUrl + "v1/stages" },
+		{ "self", BaseUrl + _path },
+		{ "stages", BaseUrl + _path + "/stages" },
 		{ "docs", BaseUrl + "swagger" }
 	};
 		_index = new ResponseModel(_links);
