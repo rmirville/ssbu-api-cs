@@ -1,5 +1,7 @@
 using SsbuTools.Api.Config;
 using SsbuTools.Api.Services;
+using SsbuTools.Core.Repositories;
+using SsbuTools.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IIndexService, IndexService>();
+builder.Services.AddSingleton<IStageRepository, StageRepository>();
 builder.Services.AddSingleton(apiConfig);
 
 var app = builder.Build();
