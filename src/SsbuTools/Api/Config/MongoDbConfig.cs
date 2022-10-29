@@ -2,9 +2,11 @@ using MongoDB.Driver;
 
 namespace SsbuTools.Api.Config;
 
-public class MongoDbConfig {
+public class MongoDbConfig
+{
 
-	public MongoDbConfig() {
+	public MongoDbConfig()
+	{
 		string? url = Environment.GetEnvironmentVariable("SSBUTOOLS_DB_MONGO_R_URL");
 		string? databaseName = Environment.GetEnvironmentVariable("SSBUTOOLS_DB_MONGO_R_DB");
 		var settings = MongoClientSettings.FromConnectionString(url);

@@ -1,3 +1,3 @@
 namespace SsbuTools.Core.Repositories;
 
-public class IStageRepository {}
+public class IStageRepository { }

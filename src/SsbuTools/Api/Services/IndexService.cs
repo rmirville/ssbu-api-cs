@@ -3,7 +3,8 @@ using SsbuTools.Api.Models.Response;
 
 namespace SsbuTools.Api.Services;
 
-public class IndexService : IIndexService {
+public class IndexService : IIndexService
+{
 	private ResponseModel _index;
 
 	private readonly string _path = "v1";
@@ -11,7 +12,8 @@ public class IndexService : IIndexService {
 
 	private Dictionary<string, string> _links;
 
-	public IndexService(ApiConfig config) {
+	public IndexService(ApiConfig config)
+	{
 		BaseUrl = config.BaseUrl;
 		_links = new Dictionary<string, string> {
 		{ "self", BaseUrl + _path },
@@ -21,7 +23,8 @@ public class IndexService : IIndexService {
 		_index = new ResponseModel(_links);
 	}
 
-	public ResponseModel GetIndex() {
+	public ResponseModel GetIndex()
+	{
 		return this._index;
 	}
 }

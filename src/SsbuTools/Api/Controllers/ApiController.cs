@@ -8,16 +8,19 @@ namespace SsbuTools.Api.Controllers;
 [ApiController]
 [Route("v1")]
 [Produces("application/json")]
-public class ApiController : ControllerBase {
+public class ApiController : ControllerBase
+{
 
 	private IIndexService IndexService;
 
-	public ApiController(IIndexService indexService) {
+	public ApiController(IIndexService indexService)
+	{
 		IndexService = indexService;
 	}
 
 	[HttpGet(Name = "ApiIndex")]
-	public ResponseModel Get() {
+	public ResponseModel Get()
+	{
 		return IndexService.GetIndex();
 	}
 }
