@@ -1,5 +1,5 @@
 using SsbuTools.Api.Config;
-using SsbuTools.Api.Models.Response;
+using SsbuTools.Api.Models;
 
 namespace SsbuTools.Api.Services;
 
@@ -8,17 +8,17 @@ public class IndexService : IIndexService
 	private ResponseModel _index;
 
 	private readonly string _path = "v1";
-	private string BaseUrl;
+	private string _baseUrl;
 
 	private Dictionary<string, string> _links;
 
 	public IndexService(ApiConfig config)
 	{
-		BaseUrl = config.BaseUrl;
+		_baseUrl = config.BaseUrl;
 		_links = new Dictionary<string, string> {
-		{ "self", BaseUrl + _path },
-		{ "stages", BaseUrl + _path + "/stages" },
-		{ "docs", BaseUrl + "swagger" }
+		{ "self", _baseUrl + _path },
+		{ "stages", _baseUrl + _path + "/stages" },
+		{ "docs", _baseUrl + "swagger" }
 	};
 		_index = new ResponseModel(_links);
 	}

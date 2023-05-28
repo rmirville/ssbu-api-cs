@@ -1,4 +1,4 @@
-using SsbuTools.Api.Models.Response;
+using SsbuTools.Api.Models;
 
 namespace SsbuTools.Api.Services;
 

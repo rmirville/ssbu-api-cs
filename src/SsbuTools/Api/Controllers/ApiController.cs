@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-using SsbuTools.Api.Models.Response;
+using SsbuTools.Api.Models;
 using SsbuTools.Api.Services;
 
 namespace SsbuTools.Api.Controllers;
@@ -11,16 +11,16 @@ namespace SsbuTools.Api.Controllers;
 public class ApiController : ControllerBase
 {
 
-	private IIndexService IndexService;
+	private IIndexService _indexService;
 
 	public ApiController(IIndexService indexService)
 	{
-		IndexService = indexService;
+		_indexService = indexService;
 	}
 
 	[HttpGet(Name = "ApiIndex")]
 	public ResponseModel Get()
 	{
-		return IndexService.GetIndex();
+		return _indexService.GetIndex();
 	}
 }
