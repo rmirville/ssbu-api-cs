@@ -19,7 +19,7 @@ public class ApiController : ControllerBase
 	}
 
 	[HttpGet(Name = "ApiIndex")]
-	public ResponseModel Get()
+	public ActionResult<ResponseModel> Get()
 	{
 		return _indexService.GetIndex();
 	}
