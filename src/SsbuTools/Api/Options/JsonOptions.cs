@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
 
-namespace SsbuTools.Api.Config;
+namespace SsbuTools.Api.Options;
 
-public class JsonConfig
+public class JsonOptions
 {
 	public static readonly JsonSerializerSettings SerializerSettings = new JsonSerializerSettings();
 }

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-
-using SsbuTools.Api.Models;
+using SsbuTools.Api.Models.Response;
 using SsbuTools.Api.Services;
 
 namespace SsbuTools.Api.Controllers;

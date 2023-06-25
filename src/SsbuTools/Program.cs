@@ -1,12 +1,12 @@
-using SsbuTools.Api.Config;
+using SsbuTools.Api.Options;
 using SsbuTools.Api.Services;
 using SsbuTools.Core.Repositories;
 using SsbuTools.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var section = builder.Configuration.GetSection(nameof(ApiConfig));
-var apiConfig = section.Get<ApiConfig>();
+builder.Services.Configure<DbOptions>(builder.Configuration.GetSection(DbOptions.ConfigName));
+builder.Services.Configure<ApiOptions>(builder.Configuration.GetSection(ApiOptions.ConfigName));
 
 // Add services to the container.
 
@@ -15,8 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IIndexService, IndexService>();
-builder.Services.AddSingleton<IStageRepository, StageRepository>();
-builder.Services.AddSingleton(apiConfig);
+builder.Services.AddSingleton<IStageClassificationsRepository, StageClassificationsRepository>();
 
 var app = builder.Build();
 

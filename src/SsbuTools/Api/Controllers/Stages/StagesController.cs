@@ -1,24 +1,25 @@
-/*  using Microsoft.AspNetCore.Mvc;
-
-using SsbuTools.Api.Models.Response;
+using Microsoft.AspNetCore.Mvc;
 using SsbuTools.Core.Repositories;
 
 namespace SsbuTools.Api.Controllers;
 
 [ApiController]
-[Route("v1")]
 [Produces("application/json")]
-public class StagesController : ControllerBase {
+public class StagesController : BaseSsbuToolsApiController {
 
-	private IStageRepository Stages;
+	private IStageClassificationsRepository _stages;
 
-	public StagesController(IStageRepository stages) {
-		Stages = stages;
+	public StagesController(IStageClassificationsRepository stages) {
+		_stages = stages;
 	}
 
 	[HttpGet(Name = "StageIndex")]
-	public ResponseModel Get() {
-		return Stages.GetIndex();
+	public async Task<JsonResult> GetAsync() {
+		// get list of stages
+		var stages = await _stages.GetAllStagesAsync();
+
+		// put them in responseModel format
+		// return the response
+		return new JsonResult(stages);
 	}
 }
- */
