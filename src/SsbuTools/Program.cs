@@ -5,7 +5,8 @@ using SsbuTools.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<DbOptions>(builder.Configuration.GetSection(DbOptions.ConfigName));
+// builder.Services.Configure<SsbuToolsOptions>(builder.Configuration.GetSection(SsbuToolsOptions.ConfigName));
+builder.Services.Configure<MongoOptions>(builder.Configuration.GetSection(MongoOptions.ConfigName));
 builder.Services.Configure<ApiOptions>(builder.Configuration.GetSection(ApiOptions.ConfigName));
 
 // Add services to the container.

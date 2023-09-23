@@ -10,19 +10,19 @@ namespace SsbuTools.Infrastructure.Repositories;
 
 public class StageClassificationsRepository : IStageClassificationsRepository {
 
-	private readonly DbOptions _dbConfig;
+	private readonly MongoOptions _mongoConfig;
 
 	private static IMongoCollection<StageClassifications>? _stageClassificationsCollection;
 
-	public StageClassificationsRepository(IOptions<DbOptions> dbConfigOptions)
+	public StageClassificationsRepository(IOptions<MongoOptions> dbConfigOptions)
 	{
-		_dbConfig = dbConfigOptions.Value;
-		var settings = MongoClientSettings.FromConnectionString(_dbConfig.Url);
+		_mongoConfig = dbConfigOptions.Value;
+		var settings = MongoClientSettings.FromConnectionString(_mongoConfig.Url);
 		settings.ServerApi = new ServerApi(ServerApiVersion.V1);
 
 		// Establish the connection to MongoDB
 		var client = new MongoClient(settings);
-		var database = client.GetDatabase(_dbConfig.DatabaseName);
+		var database = client.GetDatabase(_mongoConfig.DatabaseName);
 
 		_stageClassificationsCollection = database.GetCollection<StageClassifications>("stage_classifications");
 
