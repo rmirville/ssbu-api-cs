@@ -22,4 +22,10 @@ public class StagesController : BaseSsbuToolsApiController {
 		// return the response
 		return new JsonResult(stages);
 	}
+	[HttpGet("{id}")]
+	public async Task<JsonResult> GetByIdAsync(string id)
+	{
+		var stage = await _stages.GetStageByIdAsync(id);
+		return new JsonResult(stage);
+	}
 }

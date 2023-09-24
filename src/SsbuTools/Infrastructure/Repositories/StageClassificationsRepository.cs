@@ -37,4 +37,10 @@ public class StageClassificationsRepository : IStageClassificationsRepository {
 		.ToListAsync();
 	}
 
+	public async Task<StageClassifications> GetStageByIdAsync(string id)
+	{
+		FindOptions options = new();
+		return await _stageClassificationsCollection.Find(stage => stage.Id == id).FirstOrDefaultAsync();
+	}
+
 }
