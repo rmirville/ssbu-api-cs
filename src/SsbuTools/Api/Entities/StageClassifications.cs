@@ -1,10 +1,11 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using SsbuTools.Api.Models.Stage;
 
 namespace SsbuTools.Api.Entities;
 
 [BsonIgnoreExtraElements]
-public class StageClassifications
+public class StageClassifications : IStageSummary
 {
 	[BsonId]
 	[BsonElement("_id")]

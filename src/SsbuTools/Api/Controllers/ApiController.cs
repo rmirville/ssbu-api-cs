@@ -5,7 +5,7 @@ using SsbuTools.Api.Services;
 namespace SsbuTools.Api.Controllers;
 
 [ApiController]
-[Route("v1")]
+[Route("v2")]
 [Produces("application/json")]
 public class ApiController : ControllerBase
 {
@@ -18,7 +18,7 @@ public class ApiController : ControllerBase
 	}
 
 	[HttpGet(Name = "ApiIndex")]
-	public ActionResult<ResponseModel> Get()
+	public ActionResult<BaseResponse> Get()
 	{
 		return _indexService.GetIndex();
 	}

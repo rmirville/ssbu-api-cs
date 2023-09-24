@@ -6,12 +6,10 @@ namespace SsbuTools.Api.Services;
 
 public class IndexService : IIndexService
 {
-	private ResponseModel _index;
-
+	private BaseResponse _index;
 	private readonly ApiOptions _config;
 	private string _baseUrl;
-	private readonly string _path = "/v1";
-
+	private readonly string _path = "/v2";
 	private Dictionary<string, string> _links;
 
 	public IndexService(IOptions<ApiOptions> config)
@@ -19,14 +17,14 @@ public class IndexService : IIndexService
 		_config = config.Value;
 		_baseUrl = _config.BaseUrl;
 		_links = new Dictionary<string, string> {
-		{ "self", _baseUrl + _path },
-		{ "stages", _baseUrl + _path + "/stages" },
-		{ "docs", _baseUrl + "/swagger" }
-	};
-		_index = new ResponseModel(_links);
+			{ "self", _baseUrl + _path },
+			{ "stages", _baseUrl + _path + "/stages" },
+			{ "docs", _baseUrl + "/swagger" }
+		};
+		_index = new BaseResponse(_links);
 	}
 
-	public ResponseModel GetIndex()
+	public BaseResponse GetIndex()
 	{
 		return this._index;
 	}

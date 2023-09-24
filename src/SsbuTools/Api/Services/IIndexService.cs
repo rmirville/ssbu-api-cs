@@ -4,5 +4,5 @@ namespace SsbuTools.Api.Services;
 
 public interface IIndexService
 {
-	public ResponseModel GetIndex();
+	public BaseResponse GetIndex();
 }
