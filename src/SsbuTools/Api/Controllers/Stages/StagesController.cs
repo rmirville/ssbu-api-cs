@@ -15,11 +15,7 @@ public class StagesController : BaseSsbuToolsApiController {
 
 	[HttpGet(Name = "StageIndex")]
 	public async Task<JsonResult> GetAsync() {
-		// get list of stages
 		var stages = await _stagesService.GetAllStagesAsync();
-
-		// put them in responseModel format
-		// return the response
 		return new JsonResult(stages);
 	}
 	[HttpGet("{id}")]
