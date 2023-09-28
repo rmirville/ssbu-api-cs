@@ -60,4 +60,18 @@ public class StagesService : IStagesService
 		};
 		return new TypedResponse<StageSummary>(links, summary);
 	}
+
+	public async Task<TypedResponse<StageClassifications>> GetStageClassificationsByIdAsync(string id)
+	{
+		var stage = await _stages.GetStageByIdAsync(id);
+		var classifications = new StageClassifications(stage);
+		var stagePath = $"{_baseUrl}/{stage.Id}";
+		var links = new Dictionary<string, string>
+		{
+			{ "self", stagePath + "/classifications" },
+			{ "index", stagePath },
+			{ "stages", _baseUrl }
+		};
+		return new TypedResponse<StageClassifications>(links, classifications);
+	}
 }

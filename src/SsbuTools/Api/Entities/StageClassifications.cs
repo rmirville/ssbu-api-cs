@@ -5,7 +5,7 @@ using SsbuTools.Api.Models.Stage;
 namespace SsbuTools.Api.Entities;
 
 [BsonIgnoreExtraElements]
-public class StageClassifications : IStageSummary
+public class StageClassifications : IStageClassifications
 {
 	[BsonId]
 	[BsonElement("_id")]

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SsbuTools.Api.Services;
-using SsbuTools.Core.Repositories;
 
 namespace SsbuTools.Api.Controllers;
 
@@ -27,6 +26,13 @@ public class StagesController : BaseSsbuToolsApiController {
 	public async Task<JsonResult> GetByIdAsync(string id)
 	{
 		var stage = await _stagesService.GetStageByIdAsync(id);
+		return new JsonResult(stage);
+	}
+
+	[HttpGet("{id}/classifications")]
+	public async Task<JsonResult> GetClassificationsByIdAsync(string id)
+	{
+		var stage = await _stagesService.GetStageClassificationsByIdAsync(id);
 		return new JsonResult(stage);
 	}
 }
