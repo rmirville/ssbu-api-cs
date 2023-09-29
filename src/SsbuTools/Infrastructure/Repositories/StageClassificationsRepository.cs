@@ -12,7 +12,7 @@ public class StageClassificationsRepository : IStageClassificationsRepository {
 
 	private readonly MongoOptions _mongoConfig;
 
-	private static IMongoCollection<StageClassifications>? _stageClassificationsCollection;
+	private static IMongoCollection<StageClassificationsEntity>? _stageClassificationsCollection;
 
 	public StageClassificationsRepository(IOptions<MongoOptions> dbConfigOptions)
 	{
@@ -24,23 +24,22 @@ public class StageClassificationsRepository : IStageClassificationsRepository {
 		var client = new MongoClient(settings);
 		var database = client.GetDatabase(_mongoConfig.DatabaseName);
 
-		_stageClassificationsCollection = database.GetCollection<StageClassifications>("stage_classifications");
+		_stageClassificationsCollection = database.GetCollection<StageClassificationsEntity>("stage_classifications");
 
 		// This allows automapping of the camelCase database fields to our models. 
 		var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
 		ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 	}
 
-	public async Task<List<StageClassifications>> GetAllStagesAsync()
+	public async Task<List<StageClassificationsEntity>> GetAllStagesAsync()
 	{
-		return await _stageClassificationsCollection.Find(FilterDefinition<StageClassifications>.Empty)
+		return await _stageClassificationsCollection.Find(FilterDefinition<StageClassificationsEntity>.Empty)
 		.ToListAsync();
 	}
 
-	public async Task<StageClassifications> GetStageByIdAsync(string id)
+	public async Task<StageClassificationsEntity> GetStageByIdAsync(string id)
 	{
 		FindOptions options = new();
 		return await _stageClassificationsCollection.Find(stage => stage.Id == id).FirstOrDefaultAsync();
 	}
-
 }
