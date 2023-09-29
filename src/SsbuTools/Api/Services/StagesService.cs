@@ -15,10 +15,12 @@ public class StagesService : IStagesService
 	private readonly string _path = "/v2/stages";
 	private Dictionary<string, string> _indexLinks;
 	private IStageClassificationsRepository _stages;
+	private IStageSetRepository _stageSets;
 
-	public StagesService(IOptions<ApiOptions> config, IStageClassificationsRepository stages)
+	public StagesService(IOptions<ApiOptions> config, IStageClassificationsRepository stages, IStageSetRepository stageSets)
 	{
 		_stages = stages;
+		_stageSets = stageSets;
 		_config = config.Value;
 		_baseControllerUrl = _config.BaseUrl + _path;
 		_indexLinks = new Dictionary<string, string> {
@@ -93,5 +95,30 @@ public class StagesService : IStagesService
 			{ "stages", _baseControllerUrl }
 		};
 		return new TypedResponse<StageClassifications>(links, classifications);
+	}
+	public async Task<BaseResponseWithEmbed<StageClassificationsSetSummariesEmbed>> GetAllStageSetsAsync()
+	{
+		var summaries = ((await _stageSets.GetAllStageSetsAsync())).Select(set =>
+		{
+			return StageSetIdToStageClassificationsSetSummaryResponse(set.Id);
+		}
+		).Append(StageSetIdToStageClassificationsSetSummaryResponse("all"))
+		.ToArray();
+		var embedded = new StageClassificationsSetSummariesEmbed(summaries);
+		var links = new Dictionary<string, string> {
+			{ "self", $"{_baseControllerUrl}/classification-sets" },
+			{ "index", _baseControllerUrl }
+		};
+		return new BaseResponseWithEmbed<StageClassificationsSetSummariesEmbed>(links, embedded);
+	}
+
+	private TypedResponse<StageClassificationsSetSummary> StageSetIdToStageClassificationsSetSummaryResponse(string stageSetId)
+	{
+		var embeddedLinks = new Dictionary<string, string> {
+				{
+					"self", $"{_baseControllerUrl}/classification-sets/{stageSetId}"
+				}
+			};
+		return new TypedResponse<StageClassificationsSetSummary>(embeddedLinks, new StageClassificationsSetSummary(stageSetId));
 	}
 }

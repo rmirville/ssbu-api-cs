@@ -9,4 +9,5 @@ public interface IStagesService
 	public Task<TypedResponse<StageSummary>> GetStageByIdAsync(string id);
 	public Task<BaseResponseWithEmbed<StageClassificationsEmbed>> GetAllStageClassificationsAsync();
 	public Task<TypedResponse<StageClassifications>> GetStageClassificationsByIdAsync(string id);
+	public Task<BaseResponseWithEmbed<StageClassificationsSetSummariesEmbed>> GetAllStageSetsAsync();
 }

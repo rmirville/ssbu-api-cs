@@ -31,13 +31,13 @@ public class StageSetRepository : IStageSetRepository {
 		ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 	}
 
-	public async Task<List<StageSetEntity>> GetAllSetsAsync()
+	public async Task<List<StageSetEntity>> GetAllStageSetsAsync()
 	{
 		return await _stageSetCollection.Find(FilterDefinition<StageSetEntity>.Empty)
 		.ToListAsync();
 	}
 
-	public async Task<StageSetEntity> GetSetByIdAsync(string id)
+	public async Task<StageSetEntity> GetStageSetByIdAsync(string id)
 	{
 		FindOptions options = new();
 		return await _stageSetCollection.Find(set => set.Id == id).FirstOrDefaultAsync();
