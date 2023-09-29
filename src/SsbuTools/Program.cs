@@ -18,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IIndexService, IndexService>();
 builder.Services.AddTransient<IStagesService, StagesService>();
 builder.Services.AddSingleton<IStageClassificationsRepository, StageClassificationsRepository>();
+builder.Services.AddSingleton<IStageSetRepository, StageSetRepository>();
 
 var app = builder.Build();
 

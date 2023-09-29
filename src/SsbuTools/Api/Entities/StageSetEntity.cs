@@ -1,11 +1,11 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using SsbuTools.Api.Models.Stage;
+using SsbuTools.Api.Models.Stage.Set;
 
 namespace SsbuTools.Api.Entities;
 
 [BsonIgnoreExtraElements]
-public class StageClassificationsSetEntity: IStageClassificationsSet
+public class StageSetEntity: IStageSet
 {
 	[BsonId]
 	[BsonElement("_id")]
@@ -14,6 +14,6 @@ public class StageClassificationsSetEntity: IStageClassificationsSet
 	[BsonElement("id")]
 	public string Id { get; set; }
 
-	[BsonElement("classifications")]
-	public IStageClassifications[] Classifications{ get; set; }
+	[BsonElement("stages")]
+	public string[] Stages { get; set; }
 }
