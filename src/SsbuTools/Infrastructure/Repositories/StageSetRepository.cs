@@ -39,7 +39,6 @@ public class StageSetRepository : IStageSetRepository {
 
 	public async Task<StageSetEntity> GetStageSetByIdAsync(string id)
 	{
-		FindOptions options = new();
 		return await _stageSetCollection.Find(set => set.Id == id).FirstOrDefaultAsync();
 	}
 

@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Options;
 using SsbuTools.Api.Models.Response;
 using SsbuTools.Api.Models.Stage;
+using SsbuTools.Api.Models.Stage.Classifications.Set;
 using SsbuTools.Api.Options;
 using SsbuTools.Core.Repositories;
 
@@ -110,6 +111,23 @@ public class StagesService : IStagesService
 			{ "index", _baseControllerUrl }
 		};
 		return new BaseResponseWithEmbed<StageClassificationsSetSummariesEmbed>(links, embedded);
+	}
+
+	public async Task<TypedResponse<StageClassificationsSet>> GetStageSetByIdAsync(string id)
+	{
+		var stageSet = await _stageSets.GetStageSetByIdAsync(id);
+		var classifications = (await _stages.GetStagesByIdsAsync(stageSet.Stages))
+			.Select(classifications => new StageClassifications(classifications))
+			.ToArray();
+		var classificationsSet = new StageClassificationsSet(stageSet.Id, classifications);
+		var stageSetPath = $"{_baseControllerUrl}/classification-sets";
+		var links = new Dictionary<string, string>
+		{
+			{ "self", stageSetPath + $"/{id}" },
+			{ "index", stageSetPath },
+			{ "stages", _baseControllerUrl }
+		};
+		return new TypedResponse<StageClassificationsSet>(links, classificationsSet);
 	}
 
 	private TypedResponse<StageClassificationsSetSummary> StageSetIdToStageClassificationsSetSummaryResponse(string stageSetId)
