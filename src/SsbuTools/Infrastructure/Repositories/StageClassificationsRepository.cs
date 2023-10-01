@@ -1,4 +1,3 @@
-using Amazon.Runtime.Internal.Endpoints.StandardLibrary;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
@@ -42,8 +41,8 @@ public class StageClassificationsRepository : IStageClassificationsRepository {
 		return await _stageClassificationsCollection.Find(stage => stage.Id == id).FirstOrDefaultAsync();
 	}
 
-	public async Task<StageClassificationsEntity[]> GetStagesByIdsAsync(string[] ids)
+	public async Task<List<StageClassificationsEntity>> GetStagesByIdsAsync(string[] ids)
 	{
-		return (await _stageClassificationsCollection.Find(stage => ids.Contains(stage.Id)).ToListAsync()).ToArray();
+		return await _stageClassificationsCollection.Find(stage => ids.Contains(stage.Id)).ToListAsync();
 	}
 }

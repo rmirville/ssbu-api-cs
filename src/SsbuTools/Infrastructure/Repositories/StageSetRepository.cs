@@ -1,4 +1,3 @@
-using Amazon.Runtime.Internal.Endpoints.StandardLibrary;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;

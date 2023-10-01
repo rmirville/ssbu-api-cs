@@ -5,5 +5,5 @@ namespace SsbuTools.Core.Repositories;
 public interface IStageClassificationsRepository {
 	public Task<List<StageClassificationsEntity>> GetAllStagesAsync();
 	public Task<StageClassificationsEntity> GetStageByIdAsync(string id);
-	public Task<StageClassificationsEntity[]> GetStagesByIdsAsync(string[] ids);
+	public Task<List<StageClassificationsEntity>> GetStagesByIdsAsync(string[] ids);
 }

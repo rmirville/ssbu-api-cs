@@ -1,4 +1,4 @@
-namespace SsbuTools.Api.Models.Stage.Set;
+namespace SsbuTools.Api.Models.Stage;
 
 public class StageSet : IStageSet
 {
