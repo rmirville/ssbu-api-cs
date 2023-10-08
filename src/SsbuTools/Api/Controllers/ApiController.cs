@@ -10,9 +10,9 @@ namespace SsbuTools.Api.Controllers;
 public class ApiController : ControllerBase
 {
 
-	private IIndexService _indexService;
+	private IndexService _indexService;
 
-	public ApiController(IIndexService indexService)
+	public ApiController(IndexService indexService)
 	{
 		_indexService = indexService;
 	}

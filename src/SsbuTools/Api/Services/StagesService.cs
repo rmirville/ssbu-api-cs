@@ -4,6 +4,7 @@ using SsbuTools.Api.Models.Response;
 using SsbuTools.Api.Models.Stage;
 using SsbuTools.Api.Options;
 using SsbuTools.Core.Repositories;
+using SsbuTools.Infrastructure.Repositories;
 
 namespace SsbuTools.Api.Services;
 
@@ -15,10 +16,10 @@ public class StagesService
 	private string _baseControllerUrl;
 	private readonly string _path = "/v2/stages";
 	private Dictionary<string, string> _indexLinks;
-	private IStageClassificationsRepository _stages;
+	private StageClassificationsRepository _stages;
 	private IStageSetRepository _stageSets;
 
-	public StagesService(IOptions<ApiOptions> config, IStageClassificationsRepository stages, IStageSetRepository stageSets)
+	public StagesService(IOptions<ApiOptions> config, StageClassificationsRepository stages, IStageSetRepository stageSets)
 	{
 		_stages = stages;
 		_stageSets = stageSets;

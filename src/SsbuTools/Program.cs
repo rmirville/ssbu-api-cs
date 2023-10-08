@@ -15,9 +15,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IIndexService, IndexService>();
+builder.Services.AddTransient<IndexService>();
 builder.Services.AddTransient<StagesService>();
-builder.Services.AddSingleton<IStageClassificationsRepository, StageClassificationsRepository>();
+builder.Services.AddSingleton<StageClassificationsRepository>();
 builder.Services.AddSingleton<IStageSetRepository, StageSetRepository>();
 
 var app = builder.Build();

@@ -7,8 +7,8 @@ using SsbuTools.Core.Repositories;
 
 namespace SsbuTools.Infrastructure.Repositories;
 
-public class StageClassificationsRepository : IStageClassificationsRepository {
-
+public class StageClassificationsRepository
+{
 	private readonly MongoOptions _mongoConfig;
 
 	private static IMongoCollection<StageClassificationsEntity>? _stageClassificationsCollection;

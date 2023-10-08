@@ -4,7 +4,7 @@ using SsbuTools.Api.Models.Response;
 
 namespace SsbuTools.Api.Services;
 
-public class IndexService : IIndexService
+public class IndexService
 {
 	private BaseResponse _index;
 	private readonly ApiOptions _config;
