@@ -19,6 +19,7 @@ builder.Services.AddTransient<StageService>();
 builder.Services.AddSingleton<StageClassificationsRepository>();
 builder.Services.AddSingleton<StageSetRepository>();
 builder.Services.AddSingleton<StagePieceMapSetRepository>();
+builder.Services.AddSingleton<StageGameDatasetRepository>();
 
 var app = builder.Build();
 

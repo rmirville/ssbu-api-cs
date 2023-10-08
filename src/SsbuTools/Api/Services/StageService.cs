@@ -18,12 +18,14 @@ public class StageService
 	private StageClassificationsRepository _stages;
 	private StageSetRepository _stageSets;
 	private StagePieceMapSetRepository _stagePieceMapSets;
+	private StageGameDatasetRepository _stageGameDatasets;
 
-	public StageService(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets, StagePieceMapSetRepository stagePieceMapSets)
+	public StageService(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets, StagePieceMapSetRepository stagePieceMapSets, StageGameDatasetRepository stageGameDatasets)
 	{
 		_stages = stages;
 		_stageSets = stageSets;
 		_stagePieceMapSets = stagePieceMapSets;
+		_stageGameDatasets = stageGameDatasets;
 		_config = config.Value;
 		_baseControllerUrl = _config.BaseUrl + _path;
 		_indexLinks = new Dictionary<string, string> {
@@ -166,6 +168,25 @@ public class StageService
 		var stagePieceMapSetEntity = await _stagePieceMapSets.GetStagePieceMapSetByIdAsync(id);
 		var stagePieceMapSet = new StagePieceMapSet(stagePieceMapSetEntity);
 		return new TypedResponse<StagePieceMapSet>(links, stagePieceMapSet);
+	}
+
+	public async Task<BaseResponseWithEmbed<StageGameDatasetSummariesEmbed>> GetAllStageGameDatasetsAsync()
+	{
+		var summaries = (await _stageGameDatasets.GetAllStageGameDatasetsAsync()).Select(dataset => {
+			var links = new Dictionary<string, string> {
+				{
+					"self", $"{_baseControllerUrl}/game-data/{dataset.Id}"
+				}
+			};
+			var summary = new StageGameDatasetSummary(dataset.Id, dataset.Data[0].Name);
+			return new TypedResponse<StageGameDatasetSummary>(links, summary);
+		}).ToArray();
+		var embedded = new StageGameDatasetSummariesEmbed(summaries);
+		var links = new Dictionary<string, string> {
+			{ "self", $"{_baseControllerUrl}/game-data" },
+			{ "index", _baseControllerUrl }
+		};
+		return new BaseResponseWithEmbed<StageGameDatasetSummariesEmbed>(links, embedded);
 	}
 
 	private TypedResponse<IdSummary> IdToIdSummarySetResponse(string id, string path = "")
