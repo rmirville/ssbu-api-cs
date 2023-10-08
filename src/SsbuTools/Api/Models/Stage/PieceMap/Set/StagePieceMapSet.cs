@@ -10,4 +10,9 @@ public class StagePieceMapSet : IStagePieceMapSet
 		Id = id;
 		Maps = maps;
 	}
+	public StagePieceMapSet(IStagePieceMapSet stagePieceMapSet)
+	{
+		Id = stagePieceMapSet.Id;
+		Maps = stagePieceMapSet.Maps;
+	}
 }

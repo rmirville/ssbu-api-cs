@@ -155,6 +155,19 @@ public class StageService
 		return new BaseResponseWithEmbed<StagePieceMapSetSummariesEmbed>(links, embedded);
 	}
 
+  public async Task<TypedResponse<StagePieceMapSet>> GetStagePieceMapSetByIdAsync(string id)
+	{
+		var stagePieceMapSetPath = $"{_baseControllerUrl}/piece-maps";
+		var links = new Dictionary<string, string> {
+			{ "self", stagePieceMapSetPath + $"/{id}" },
+			{ "index", stagePieceMapSetPath },
+			{ "stages", _baseControllerUrl }
+		};
+		var stagePieceMapSetEntity = await _stagePieceMapSets.GetStagePieceMapSetByIdAsync(id);
+		var stagePieceMapSet = new StagePieceMapSet(stagePieceMapSetEntity);
+		return new TypedResponse<StagePieceMapSet>(links, stagePieceMapSet);
+	}
+
 	private TypedResponse<IdSummary> IdToIdSummarySetResponse(string id, string path = "")
 	{
 		var embeddedLinks = new Dictionary<string, string> {
