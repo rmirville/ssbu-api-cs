@@ -3,7 +3,6 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using SsbuTools.Api.Options;
 using SsbuTools.Api.Entities;
-using SsbuTools.Core.Repositories;
 
 namespace SsbuTools.Infrastructure.Repositories;
 

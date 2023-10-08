@@ -1,6 +1,5 @@
 using SsbuTools.Api.Options;
 using SsbuTools.Api.Services;
-using SsbuTools.Core.Repositories;
 using SsbuTools.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IndexService>();
 builder.Services.AddTransient<StagesService>();
 builder.Services.AddSingleton<StageClassificationsRepository>();
-builder.Services.AddSingleton<IStageSetRepository, StageSetRepository>();
+builder.Services.AddSingleton<StageSetRepository>();
 
 var app = builder.Build();
 

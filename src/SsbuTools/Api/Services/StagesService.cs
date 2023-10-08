@@ -3,7 +3,6 @@ using SsbuTools.Api.Entities;
 using SsbuTools.Api.Models.Response;
 using SsbuTools.Api.Models.Stage;
 using SsbuTools.Api.Options;
-using SsbuTools.Core.Repositories;
 using SsbuTools.Infrastructure.Repositories;
 
 namespace SsbuTools.Api.Services;
@@ -17,9 +16,9 @@ public class StagesService
 	private readonly string _path = "/v2/stages";
 	private Dictionary<string, string> _indexLinks;
 	private StageClassificationsRepository _stages;
-	private IStageSetRepository _stageSets;
+	private StageSetRepository _stageSets;
 
-	public StagesService(IOptions<ApiOptions> config, StageClassificationsRepository stages, IStageSetRepository stageSets)
+	public StagesService(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets)
 	{
 		_stages = stages;
 		_stageSets = stageSets;

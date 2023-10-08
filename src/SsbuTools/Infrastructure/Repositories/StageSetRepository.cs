@@ -3,12 +3,11 @@ using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using SsbuTools.Api.Options;
 using SsbuTools.Api.Entities;
-using SsbuTools.Core.Repositories;
 
 namespace SsbuTools.Infrastructure.Repositories;
 
-public class StageSetRepository : IStageSetRepository {
-
+public class StageSetRepository
+{
 	private readonly MongoOptions _mongoConfig;
 
 	private static IMongoCollection<StageSetEntity>? _stageSetCollection;
