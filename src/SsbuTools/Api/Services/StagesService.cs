@@ -7,7 +7,7 @@ using SsbuTools.Core.Repositories;
 
 namespace SsbuTools.Api.Services;
 
-public class StagesService : IStagesService
+public class StagesService
 {
 	private BaseResponse _index;
 
@@ -139,6 +139,11 @@ public class StagesService : IStagesService
 			.ToArray();
 		var classificationsSet = new StageClassificationsSet(id, classifications);
 		return new TypedResponse<StageClassificationsSet>(links, classificationsSet);
+	}
+
+	public object GetAllStagePieceMapsAsync()
+	{
+		return new { };
 	}
 
 	private TypedResponse<StageClassificationsSetSummary> StageSetIdToStageClassificationsSetSummaryResponse(string stageSetId)

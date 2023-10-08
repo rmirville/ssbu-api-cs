@@ -7,9 +7,9 @@ namespace SsbuTools.Api.Controllers;
 [Produces("application/json")]
 public class StagesController : BaseSsbuToolsApiController {
 
-	private IStagesService _stagesService;
+	private StagesService _stagesService;
 
-	public StagesController(IStagesService stagesService) {
+	public StagesController(StagesService stagesService) {
 		_stagesService = stagesService;
 	}
 
@@ -51,5 +51,12 @@ public class StagesController : BaseSsbuToolsApiController {
 	{
 		var stageSet = await _stagesService.GetStageSetByIdAsync(id);
 		return new JsonResult(stageSet);
+	}
+
+	[HttpGet("piece-maps")]
+	public JsonResult GetAllStagePieceMapsAsync()
+	{
+		var pieceMaps = _stagesService.GetAllStagePieceMapsAsync();
+		return new JsonResult(pieceMaps);
 	}
 }
