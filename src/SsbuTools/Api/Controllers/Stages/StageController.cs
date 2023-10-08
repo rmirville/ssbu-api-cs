@@ -5,11 +5,11 @@ namespace SsbuTools.Api.Controllers;
 
 [ApiController]
 [Produces("application/json")]
-public class StagesController : BaseSsbuToolsApiController {
+public class StageController : BaseSsbuToolsApiController {
 
-	private StagesService _stagesService;
+	private StageService _stagesService;
 
-	public StagesController(StagesService stagesService) {
+	public StageController(StageService stagesService) {
 		_stagesService = stagesService;
 	}
 

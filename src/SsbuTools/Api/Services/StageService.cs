@@ -7,7 +7,7 @@ using SsbuTools.Infrastructure.Repositories;
 
 namespace SsbuTools.Api.Services;
 
-public class StagesService
+public class StageService
 {
 	private BaseResponse _index;
 
@@ -19,7 +19,7 @@ public class StagesService
 	private StageSetRepository _stageSets;
 	private StagePieceMapSetRepository _stagePieceMapSets;
 
-	public StagesService(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets, StagePieceMapSetRepository stagePieceMapSets)
+	public StageService(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets, StagePieceMapSetRepository stagePieceMapSets)
 	{
 		_stages = stages;
 		_stageSets = stageSets;

@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IndexService>();
-builder.Services.AddTransient<StagesService>();
+builder.Services.AddTransient<StageService>();
 builder.Services.AddSingleton<StageClassificationsRepository>();
 builder.Services.AddSingleton<StageSetRepository>();
 builder.Services.AddSingleton<StagePieceMapSetRepository>();
