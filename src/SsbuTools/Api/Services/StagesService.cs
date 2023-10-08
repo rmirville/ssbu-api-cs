@@ -101,9 +101,9 @@ public class StagesService
 	{
 		var summaries = ((await _stageSets.GetAllStageSetsAsync())).Select(set =>
 		{
-			return StageSetIdToStageClassificationsSetSummaryResponse(set.Id);
+			return StageSetIdToIdSummarySetResponse(set.Id);
 		}
-		).Append(StageSetIdToStageClassificationsSetSummaryResponse("all"))
+		).Append(StageSetIdToIdSummarySetResponse("all"))
 		.ToArray();
 		var embedded = new StageClassificationsSetSummariesEmbed(summaries);
 		var links = new Dictionary<string, string> {
@@ -141,18 +141,18 @@ public class StagesService
 		return new TypedResponse<StageClassificationsSet>(links, classificationsSet);
 	}
 
-	public object GetAllStagePieceMapsAsync()
+	public object GetAllStagePieceMapSetsAsync()
 	{
 		return new { };
 	}
 
-	private TypedResponse<StageClassificationsSetSummary> StageSetIdToStageClassificationsSetSummaryResponse(string stageSetId)
+	private TypedResponse<IdSummary> StageSetIdToIdSummarySetResponse(string stageSetId)
 	{
 		var embeddedLinks = new Dictionary<string, string> {
 				{
 					"self", $"{_baseControllerUrl}/classification-sets/{stageSetId}"
 				}
 			};
-		return new TypedResponse<StageClassificationsSetSummary>(embeddedLinks, new StageClassificationsSetSummary(stageSetId));
+		return new TypedResponse<IdSummary>(embeddedLinks, new IdSummary(stageSetId));
 	}
 }
