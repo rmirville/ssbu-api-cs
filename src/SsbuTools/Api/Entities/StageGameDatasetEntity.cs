@@ -12,8 +12,8 @@ public class StageGameDatasetEntity
 	public ObjectId DbId { get; set; }
 	
 	[BsonElement("id")]
-	public string Id { get; set; }
+	public string Id { get; set; } = "";
 
 	[BsonElement("data")]
-	public List<StageGameData> Data { get; set; }
+	public List<StageGameData> Data { get; set; } = new List<StageGameData>();
 }

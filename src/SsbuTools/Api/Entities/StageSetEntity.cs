@@ -12,8 +12,8 @@ public class StageSetEntity: IStageSet
 	public ObjectId DbId { get; set; }
 
 	[BsonElement("id")]
-	public string Id { get; set; }
+	public string Id { get; set; } = "";
 
 	[BsonElement("stages")]
-	public string[] Stages { get; set; }
+	public string[] Stages { get; set; } = new string[] { };
 }

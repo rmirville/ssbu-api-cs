@@ -12,20 +12,20 @@ public class StageClassificationsEntity : IStageClassifications
 	public ObjectId DbId { get; set; }
 
 	[BsonElement("id")]
-	public string Id { get; set; }
+	public string Id { get; set; } = "";
 
 	[BsonElement("abbr")]
-	public string Abbr { get; set; }
+	public string Abbr { get; set; } = "";
 
 	[BsonElement("gameName")]
-	public string GameName { get; set; }
+	public string GameName { get; set; } = "";
 
 	[BsonElement("name")]
-	public string Name { get; set; }
+	public string Name { get; set; } = "";
 
 	[BsonElement("series")]
-	public string Series { get; set; }
+	public string Series { get; set; } = "";
 
 	[BsonElement("tourneyPresence")]
-	public int TourneyPresence { get; set; }
+	public int TourneyPresence { get; set; } = -1;
 }

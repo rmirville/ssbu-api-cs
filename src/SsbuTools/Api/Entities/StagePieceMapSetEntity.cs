@@ -12,8 +12,8 @@ public class StagePieceMapSetEntity: IStagePieceMapSet
 	public ObjectId DbId { get; set; }
 
 	[BsonElement("id")]
-	public string Id { get; set; }
+	public string Id { get; set; } = "";
 
 	[BsonElement("maps")]
-	public StagePieceMap[] Maps { get; set; }
+	public StagePieceMap[] Maps { get; set; } = new StagePieceMap[] { };
 }
