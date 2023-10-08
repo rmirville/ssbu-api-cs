@@ -17,11 +17,13 @@ public class StagesService
 	private Dictionary<string, string> _indexLinks;
 	private StageClassificationsRepository _stages;
 	private StageSetRepository _stageSets;
+	private StagePieceMapSetRepository _stagePieceMapSets;
 
-	public StagesService(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets)
+	public StagesService(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets, StagePieceMapSetRepository stagePieceMapSets)
 	{
 		_stages = stages;
 		_stageSets = stageSets;
+		_stagePieceMapSets = stagePieceMapSets;
 		_config = config.Value;
 		_baseControllerUrl = _config.BaseUrl + _path;
 		_indexLinks = new Dictionary<string, string> {
@@ -101,9 +103,9 @@ public class StagesService
 	{
 		var summaries = ((await _stageSets.GetAllStageSetsAsync())).Select(set =>
 		{
-			return StageSetIdToIdSummarySetResponse(set.Id);
+			return IdToIdSummarySetResponse(set.Id, "classification-sets");
 		}
-		).Append(StageSetIdToIdSummarySetResponse("all"))
+		).Append(IdToIdSummarySetResponse("all"))
 		.ToArray();
 		var embedded = new StageClassificationsSetSummariesEmbed(summaries);
 		var links = new Dictionary<string, string> {
@@ -141,18 +143,25 @@ public class StagesService
 		return new TypedResponse<StageClassificationsSet>(links, classificationsSet);
 	}
 
-	public object GetAllStagePieceMapSetsAsync()
+	public async Task<BaseResponseWithEmbed<StagePieceMapSetSummariesEmbed>> GetAllStagePieceMapSetsAsync()
 	{
-		return new { };
+		var summaries = (await _stagePieceMapSets.GetAllStagePieceMapSetsAsync()).Select(set => IdToIdSummarySetResponse(set.Id, "piece-maps")).ToArray();
+		var embedded = new StagePieceMapSetSummariesEmbed(summaries);
+		var links = new Dictionary<string, string> {
+			{ "self", $"{_baseControllerUrl}/piece-maps" },
+			{ "index", _baseControllerUrl }
+		};
+
+		return new BaseResponseWithEmbed<StagePieceMapSetSummariesEmbed>(links, embedded);
 	}
 
-	private TypedResponse<IdSummary> StageSetIdToIdSummarySetResponse(string stageSetId)
+	private TypedResponse<IdSummary> IdToIdSummarySetResponse(string id, string path = "")
 	{
 		var embeddedLinks = new Dictionary<string, string> {
 				{
-					"self", $"{_baseControllerUrl}/classification-sets/{stageSetId}"
+					"self", $"{_baseControllerUrl}/{path}/{id}"
 				}
 			};
-		return new TypedResponse<IdSummary>(embeddedLinks, new IdSummary(stageSetId));
+		return new TypedResponse<IdSummary>(embeddedLinks, new IdSummary(id));
 	}
 }

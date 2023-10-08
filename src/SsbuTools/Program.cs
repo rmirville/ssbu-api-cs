@@ -18,6 +18,7 @@ builder.Services.AddTransient<IndexService>();
 builder.Services.AddTransient<StagesService>();
 builder.Services.AddSingleton<StageClassificationsRepository>();
 builder.Services.AddSingleton<StageSetRepository>();
+builder.Services.AddSingleton<StagePieceMapSetRepository>();
 
 var app = builder.Build();
 
