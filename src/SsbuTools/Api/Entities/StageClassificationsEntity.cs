@@ -29,12 +29,3 @@ public class StageClassificationsEntity : IStageClassifications
 	[BsonElement("tourneyPresence")]
 	public TourneyPresence TourneyPresence { get; set; } = TourneyPresence.Unknown;
 }
-
-public enum TourneyPresence
-{
-	Unknown = 0,
-	CommonlyLegal = 1,
-	UncommonlyLegal = 2,
-	RarelyLegal = 3,
-	PotentiallyLegal = 4,
-}
