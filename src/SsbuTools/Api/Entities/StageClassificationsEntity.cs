@@ -27,5 +27,14 @@ public class StageClassificationsEntity : IStageClassifications
 	public string Series { get; set; } = "";
 
 	[BsonElement("tourneyPresence")]
-	public int TourneyPresence { get; set; } = -1;
+	public TourneyPresence TourneyPresence { get; set; } = TourneyPresence.Unknown;
+}
+
+public enum TourneyPresence
+{
+	Unknown = 0,
+	CommonlyLegal = 1,
+	UncommonlyLegal = 2,
+	RarelyLegal = 3,
+	PotentiallyLegal = 4,
 }

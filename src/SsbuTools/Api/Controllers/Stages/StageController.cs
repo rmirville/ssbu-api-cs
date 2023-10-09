@@ -4,6 +4,7 @@ using SsbuTools.Api.Services;
 namespace SsbuTools.Api.Controllers;
 
 [ApiController]
+[Route("v2/stages")]
 [Produces("application/json")]
 public class StageController : BaseSsbuToolsApiController {
 
