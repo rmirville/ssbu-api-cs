@@ -6,7 +6,7 @@ using SsbuTools.Api.Entities;
 
 namespace SsbuTools.Infrastructure.Repositories;
 
-public class StagePieceMapSetRepository : SsbuToolsRepository<StagePieceMapSetEntity>
+public class StagePieceMapSetRepository : BaseStageRepository<StagePieceMapSetEntity>
 {
 	public StagePieceMapSetRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions)
 	{

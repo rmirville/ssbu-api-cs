@@ -6,7 +6,7 @@ using SsbuTools.Api.Options;
 
 namespace SsbuTools.Infrastructure.Repositories;
 
-public class StageGameDatasetRepository : SsbuToolsRepository<StageGameDatasetEntity>
+public class StageGameDatasetRepository : BaseStageRepository<StageGameDatasetEntity>
 {
 	public StageGameDatasetRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions)
 	{

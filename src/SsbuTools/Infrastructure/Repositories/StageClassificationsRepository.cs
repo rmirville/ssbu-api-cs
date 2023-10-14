@@ -6,7 +6,7 @@ using SsbuTools.Api.Entities;
 
 namespace SsbuTools.Infrastructure.Repositories;
 
-public class StageClassificationsRepository : SsbuToolsRepository<StageClassificationsEntity>
+public class StageClassificationsRepository : BaseStageRepository<StageClassificationsEntity>
 {
 	public StageClassificationsRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions)
 	{

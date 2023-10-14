@@ -5,14 +5,14 @@ using SsbuTools.Api.Options;
 
 namespace SsbuTools.Infrastructure.Repositories;
 
-public abstract class SsbuToolsRepository<T>
+public abstract class BaseStageRepository<T>
 {
 	protected readonly MongoOptions _mongoConfig;
 	protected readonly IMongoDatabase _database;
 
 	protected IMongoCollection<T>? _collection;
 
-	public SsbuToolsRepository(IOptions<MongoOptions> dbConfigOptions)
+	public BaseStageRepository(IOptions<MongoOptions> dbConfigOptions)
 	{
 		_mongoConfig = dbConfigOptions.Value;
 		var settings = MongoClientSettings.FromConnectionString(_mongoConfig.Url);
