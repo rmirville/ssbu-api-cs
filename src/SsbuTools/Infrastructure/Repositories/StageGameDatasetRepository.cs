@@ -9,16 +9,16 @@ public class StageGameDatasetRepository : BaseStageRepository<StageGameDatasetEn
 {
 	public StageGameDatasetRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions)
 	{
-		_collection = _database.GetCollection<StageGameDatasetEntity>("stage_game_data");
+		Collection = Database.GetCollection<StageGameDatasetEntity>("stage_game_data");
 	}
 
 	public async Task<List<StageGameDatasetEntity>> GetAllStageGameDatasetsAsync()
 	{
-		return await _collection.Find(FilterDefinition<StageGameDatasetEntity>.Empty).ToListAsync();
+		return await Collection.Find(FilterDefinition<StageGameDatasetEntity>.Empty).ToListAsync();
 	}
 
 	public async Task<StageGameDatasetEntity> GetStageGameDatasetByIdAsync(string id)
 	{
-		return await _collection.Find(set => set.Id == id).FirstOrDefaultAsync();
+		return await Collection.Find(set => set.Id == id).FirstOrDefaultAsync();
 	}
 }

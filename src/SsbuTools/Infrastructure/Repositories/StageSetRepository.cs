@@ -9,17 +9,17 @@ public class StageSetRepository : BaseStageRepository<StageSetEntity>
 {
 	public StageSetRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions)
 	{
-		_collection = _database.GetCollection<StageSetEntity>("stage_sets");
+		Collection = Database.GetCollection<StageSetEntity>("stage_sets");
 	}
 
 	public async Task<List<StageSetEntity>> GetAllStageSetsAsync()
 	{
-		return await _collection.Find(FilterDefinition<StageSetEntity>.Empty)
+		return await Collection.Find(FilterDefinition<StageSetEntity>.Empty)
 		.ToListAsync();
 	}
 
 	public async Task<StageSetEntity> GetStageSetByIdAsync(string id)
 	{
-		return await _collection.Find(set => set.Id == id).FirstOrDefaultAsync();
+		return await Collection.Find(set => set.Id == id).FirstOrDefaultAsync();
 	}
 }

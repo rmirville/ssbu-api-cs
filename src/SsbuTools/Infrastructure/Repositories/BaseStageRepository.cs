@@ -7,20 +7,20 @@ namespace SsbuTools.Infrastructure.Repositories;
 
 public abstract class BaseStageRepository<T>
 {
-	protected readonly MongoOptions _mongoConfig;
-	protected readonly IMongoDatabase _database;
+	protected MongoOptions MongoConfig { get; init; }
+	protected IMongoDatabase Database { get; init; }
 
-	protected IMongoCollection<T>? _collection;
+	protected IMongoCollection<T>? Collection { get; init; }
 
 	public BaseStageRepository(IOptions<MongoOptions> dbConfigOptions)
 	{
-		_mongoConfig = dbConfigOptions.Value;
-		var settings = MongoClientSettings.FromConnectionString(_mongoConfig.Url);
+		MongoConfig = dbConfigOptions.Value;
+		var settings = MongoClientSettings.FromConnectionString(MongoConfig.Url);
 		settings.ServerApi = new ServerApi(ServerApiVersion.V1);
 
 		// Establish the connection to MongoDB
 		var client = new MongoClient(settings);
-		_database = client.GetDatabase(_mongoConfig.DatabaseName);
+		Database = client.GetDatabase(MongoConfig.DatabaseName);
 
 		// This allows automapping of the camelCase database fields to our models. 
 		var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
