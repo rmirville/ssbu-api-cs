@@ -6,36 +6,20 @@ using SsbuTools.Api.Options;
 
 namespace SsbuTools.Infrastructure.Repositories;
 
-public class StageGameDatasetRepository
+public class StageGameDatasetRepository : SsbuToolsRepository<StageGameDatasetEntity>
 {
-	private readonly MongoOptions _mongoConfig;
-
-	private static IMongoCollection<StageGameDatasetEntity>? _stageGameDatasetCollection;
-
-	public StageGameDatasetRepository(IOptions<MongoOptions> dbConfigOptions)
+	public StageGameDatasetRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions)
 	{
-		_mongoConfig = dbConfigOptions.Value;
-		var settings = MongoClientSettings.FromConnectionString(_mongoConfig.Url);
-		settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-
-		// Establish the connection to MongoDB
-		var client = new MongoClient(settings);
-		var database = client.GetDatabase(_mongoConfig.DatabaseName);
-
-		_stageGameDatasetCollection = database.GetCollection<StageGameDatasetEntity>("stage_game_data");
-
-		// This allows automapping of the camelCase database fields to our models. 
-		var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
-		ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
+		_collection = _database.GetCollection<StageGameDatasetEntity>("stage_game_data");
 	}
 
 	public async Task<List<StageGameDatasetEntity>> GetAllStageGameDatasetsAsync()
 	{
-		return await _stageGameDatasetCollection.Find(FilterDefinition<StageGameDatasetEntity>.Empty).ToListAsync();
+		return await _collection.Find(FilterDefinition<StageGameDatasetEntity>.Empty).ToListAsync();
 	}
 
 	public async Task<StageGameDatasetEntity> GetStageGameDatasetByIdAsync(string id)
 	{
-		return await _stageGameDatasetCollection.Find(set => set.Id == id).FirstOrDefaultAsync();
+		return await _collection.Find(set => set.Id == id).FirstOrDefaultAsync();
 	}
 }
