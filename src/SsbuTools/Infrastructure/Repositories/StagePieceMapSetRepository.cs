@@ -6,38 +6,21 @@ using SsbuTools.Api.Entities;
 
 namespace SsbuTools.Infrastructure.Repositories;
 
-public class StagePieceMapSetRepository
+public class StagePieceMapSetRepository : SsbuToolsRepository<StagePieceMapSetEntity>
 {
-	private readonly MongoOptions _mongoConfig;
-
-	private static IMongoCollection<StagePieceMapSetEntity>? _stagePieceMapSetCollection;
-
-	public StagePieceMapSetRepository(IOptions<MongoOptions> dbConfigOptions)
+	public StagePieceMapSetRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions)
 	{
-		_mongoConfig = dbConfigOptions.Value;
-		var settings = MongoClientSettings.FromConnectionString(_mongoConfig.Url);
-		settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-
-		// Establish the connection to MongoDB
-		var client = new MongoClient(settings);
-		var database = client.GetDatabase(_mongoConfig.DatabaseName);
-
-		_stagePieceMapSetCollection = database.GetCollection<StagePieceMapSetEntity>("stage_piece_maps");
-
-		// This allows automapping of the camelCase database fields to our models. 
-		var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
-		ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
+		_collection = _database.GetCollection<StagePieceMapSetEntity>("stage_piece_maps");
 	}
 
 	public async Task<List<StagePieceMapSetEntity>> GetAllStagePieceMapSetsAsync()
 	{
-		return await _stagePieceMapSetCollection.Find(FilterDefinition<StagePieceMapSetEntity>.Empty)
+		return await _collection.Find(FilterDefinition<StagePieceMapSetEntity>.Empty)
 		.ToListAsync();
 	}
 
 	public async Task<StagePieceMapSetEntity> GetStagePieceMapSetByIdAsync(string id)
 	{
-		return await _stagePieceMapSetCollection.Find(set => set.Id == id).FirstOrDefaultAsync();
+		return await _collection.Find(set => set.Id == id).FirstOrDefaultAsync();
 	}
-
 }
