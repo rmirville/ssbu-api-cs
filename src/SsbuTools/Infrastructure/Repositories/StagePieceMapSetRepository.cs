@@ -7,10 +7,8 @@ namespace SsbuTools.Infrastructure.Repositories;
 
 public class StagePieceMapSetRepository : BaseStageRepository<StagePieceMapSetEntity>
 {
-	public StagePieceMapSetRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions)
-	{
-		Collection = Database.GetCollection<StagePieceMapSetEntity>("stage_piece_maps");
-	}
+	protected override string CollectionName { get => "stage_piece_maps"; }
+	public StagePieceMapSetRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions) { }
 
 	public async Task<List<StagePieceMapSetEntity>> GetAllStagePieceMapSetsAsync()
 	{

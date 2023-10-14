@@ -7,10 +7,9 @@ namespace SsbuTools.Infrastructure.Repositories;
 
 public class StageClassificationsRepository : BaseStageRepository<StageClassificationsEntity>
 {
-	public StageClassificationsRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions)
-	{
-		Collection = Database.GetCollection<StageClassificationsEntity>("stage_classifications");
-	}
+  protected override string CollectionName { get => "stage_classifications"; }
+
+  public StageClassificationsRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions) { }
 
 	public async Task<List<StageClassificationsEntity>> GetAllStagesAsync()
 	{

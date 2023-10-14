@@ -10,6 +10,8 @@ public abstract class BaseStageRepository<T>
 	protected MongoOptions MongoConfig { get; init; }
 	protected IMongoDatabase Database { get; init; }
 
+	protected abstract string CollectionName { get; }
+
 	protected IMongoCollection<T>? Collection { get; init; }
 
 	public BaseStageRepository(IOptions<MongoOptions> dbConfigOptions)
@@ -25,5 +27,6 @@ public abstract class BaseStageRepository<T>
 		// This allows automapping of the camelCase database fields to our models. 
 		var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
 		ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
+		Collection = Database.GetCollection<T>(CollectionName);
 	}
 }
