@@ -31,6 +31,7 @@ public class StageService
 		_indexLinks = new Dictionary<string, string> {
 			{ "self", _baseControllerUrl },
 			{ "classifications", _baseControllerUrl + "/classifications" },
+			{ "classificationSets", _baseControllerUrl + "/classification-sets" },
 			{ "gameData", _baseControllerUrl + "/game-data" },
 			{ "pieceMaps", _baseControllerUrl + "/piece-maps" },
 		};
@@ -103,11 +104,11 @@ public class StageService
 	}
 	public async Task<BaseResponseWithEmbed<StageClassificationsSetSummariesEmbed>> GetAllStageSetsAsync()
 	{
-		var summaries = ((await _stageSets.GetAllStageSetsAsync())).Select(set =>
+		var summaries = (await _stageSets.GetAllStageSetsAsync()).Select(set =>
 		{
 			return IdToIdSummarySetResponse(set.Id, "classification-sets");
 		}
-		).Append(IdToIdSummarySetResponse("all"))
+		).Append(IdToIdSummarySetResponse("all", "classification-sets"))
 		.ToArray();
 		var embedded = new StageClassificationsSetSummariesEmbed(summaries);
 		var links = new Dictionary<string, string> {
