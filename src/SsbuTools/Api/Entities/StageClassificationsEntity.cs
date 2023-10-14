@@ -5,15 +5,8 @@ using SsbuTools.Api.Models.Stage;
 namespace SsbuTools.Api.Entities;
 
 [BsonIgnoreExtraElements]
-public class StageClassificationsEntity : IStageClassifications
+public class StageClassificationsEntity : MongoEntity, IStageClassifications
 {
-	[BsonId]
-	[BsonElement("_id")]
-	public ObjectId DbId { get; set; }
-
-	[BsonElement("id")]
-	public string Id { get; set; } = "";
-
 	[BsonElement("abbr")]
 	public string Abbr { get; set; } = "";
 
