@@ -15,5 +15,5 @@ public class StagePieceMapSetEntity: IStagePieceMapSet
 	public string Id { get; set; } = "";
 
 	[BsonElement("maps")]
-	public StagePieceMap[] Maps { get; set; } = new StagePieceMap[] { };
+	public StagePieceMap[] Maps { get; set; } = Array.Empty<StagePieceMap>();
 }
