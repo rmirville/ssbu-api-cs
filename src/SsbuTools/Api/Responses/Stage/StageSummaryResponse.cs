@@ -6,7 +6,7 @@ namespace SsbuTools.Api.Responses;
 
 public class StageSummaryResponse : SsbuToolsResponse
 {
-	public StageSummaryResponse(StageClassifications entity, string baseUrl)
+	public StageSummaryResponse(IStageClassifications entity, string baseUrl)
 	{
 		var stageUrl = $"{baseUrl}/{entity.Id}";
 		var links = new Dictionary<string, string>

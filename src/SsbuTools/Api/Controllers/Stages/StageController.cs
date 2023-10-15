@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using SsbuTools.Api.Models;
+using SsbuTools.Api.Options;
+using SsbuTools.Api.Responses;
 
 namespace SsbuTools.Api.Controllers;
 
@@ -8,10 +11,15 @@ namespace SsbuTools.Api.Controllers;
 [Produces("application/json")]
 public class StageController : BaseSsbuToolsApiController {
 
-	private StageModel _stageModel;
+	private readonly StageModel _stageModel;
+	private readonly ApiOptions _config;
+	private readonly string _baseRoute = "/v2/stages";
+	private readonly string _baseControllerUrl;
 
-	public StageController(StageModel stageModel) {
+	public StageController(IOptions<ApiOptions> config, StageModel stageModel) {
+		_config = config.Value;
 		_stageModel = stageModel;
+		_baseControllerUrl = _config.BaseUrl + _baseRoute;
 	}
 
 	[HttpGet(Name = "StageIndex")]
@@ -23,7 +31,7 @@ public class StageController : BaseSsbuToolsApiController {
 	public async Task<JsonResult> GetByIdAsync(string id)
 	{
 		var stage = await _stageModel.GetStageByIdAsync(id);
-		return new JsonResult(stage);
+		return new StageSummaryResponse(stage, _baseControllerUrl).ToJsonResult();
 	}
 
 	[HttpGet("classifications")]

@@ -52,20 +52,7 @@ public class StageModel
 		return new BaseRestResourceWithEmbed<StageSummariesEmbed>(_indexLinks, embedded);
 	}
 
-  public async Task<RestResource<StageSummary>> GetStageByIdAsync(string id)
-	{
-		var stage = await _stages.GetByIdAsync(id);
-		var summary = new StageSummary(stage.Id, stage.Name, stage.GameName);
-		var stagePath = $"{_baseControllerUrl}/{stage.Id}";
-		var links = new Dictionary<string, string>
-		{
-			{ "self", stagePath },
-			{ "index", _baseControllerUrl },
-			{ "classifications", stagePath + "/classifications" },
-			{ "gameData", stagePath + "/game-data" }
-		};
-		return new RestResource<StageSummary>(links, summary);
-	}
+  public Task<StageClassificationsEntity> GetStageByIdAsync(string id) => _stages.GetByIdAsync(id);
 
 	public async Task<BaseRestResourceWithEmbed<StageClassificationsEmbed>> GetAllStageClassificationsAsync()
 	{
