@@ -136,8 +136,7 @@ public class StageService
 		else
 		{
 			var stageSet = await _stageSets.GetStageSetByIdAsync(id);
-			classificationsTask = _stages.GetStagesByIdsAsync(stageSet.Stages);
-				
+			classificationsTask = _stages.GetManyByIdsAsync(stageSet.Stages);
 		}
 		var classifications = (await classificationsTask)
 			.Select(classifications => new StageClassifications(classifications))
