@@ -172,7 +172,7 @@ public class StageService
 
 	public async Task<BaseResponseWithEmbed<StageGameDatasetSummariesEmbed>> GetAllStageGameDatasetsAsync()
 	{
-		var summaries = (await _stageGameDatasets.GetAllStageGameDatasetsAsync()).Select(dataset => {
+		var summaries = (await _stageGameDatasets.GetAllAsync()).Select(dataset => {
 			var links = new Dictionary<string, string> {
 				{
 					"self", $"{_baseControllerUrl}/game-data/{dataset.Id}"
