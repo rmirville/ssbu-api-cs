@@ -11,11 +11,6 @@ public class StageClassificationsRepository : BaseStageRepository<StageClassific
 
   public StageClassificationsRepository(IOptions<MongoOptions> dbConfigOptions) : base(dbConfigOptions) { }
 
-	public async Task<StageClassificationsEntity> GetStageByIdAsync(string id)
-	{
-		return await Collection.Find(stage => stage.Id == id).FirstOrDefaultAsync();
-	}
-
 	public async Task<List<StageClassificationsEntity>> GetStagesByIdsAsync(string[] ids)
 	{
 		return await Collection.Find(stage => ids.Contains(stage.Id)).ToListAsync();

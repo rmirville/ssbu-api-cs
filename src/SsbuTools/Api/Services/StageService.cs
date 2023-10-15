@@ -56,7 +56,7 @@ public class StageService
 
   public async Task<TypedResponse<StageSummary>> GetStageByIdAsync(string id)
 	{
-		var stage = await _stages.GetStageByIdAsync(id);
+		var stage = await _stages.GetByIdAsync(id);
 		var summary = new StageSummary(stage.Id, stage.Name, stage.GameName);
 		var stagePath = $"{_baseControllerUrl}/{stage.Id}";
 		var links = new Dictionary<string, string>
@@ -91,7 +91,7 @@ public class StageService
 
 	public async Task<TypedResponse<StageClassifications>> GetStageClassificationsByIdAsync(string id)
 	{
-		var stage = await _stages.GetStageByIdAsync(id);
+		var stage = await _stages.GetByIdAsync(id);
 		var classifications = new StageClassifications(stage);
 		var stagePath = $"{_baseControllerUrl}/{stage.Id}";
 		var links = new Dictionary<string, string>
