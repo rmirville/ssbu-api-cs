@@ -18,7 +18,7 @@ public class ApiController : ControllerBase
 	}
 
 	[HttpGet(Name = "ApiIndex")]
-	public ActionResult<BaseResponse> Get()
+	public ActionResult<BaseRestResource> Get()
 	{
 		return _indexService.GetIndex();
 	}

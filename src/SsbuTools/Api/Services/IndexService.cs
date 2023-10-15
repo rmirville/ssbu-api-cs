@@ -6,7 +6,7 @@ namespace SsbuTools.Api.Services;
 
 public class IndexService
 {
-	private BaseResponse _index;
+	private BaseRestResource _index;
 	private readonly ApiOptions _config;
 	private string _baseUrl;
 	private readonly string _path = "/v2";
@@ -21,10 +21,10 @@ public class IndexService
 			{ "stages", _baseUrl + _path + "/stages" },
 			{ "docs", _baseUrl + "/swagger" }
 		};
-		_index = new BaseResponse(_links);
+		_index = new BaseRestResource(_links);
 	}
 
-	public BaseResponse GetIndex()
+	public BaseRestResource GetIndex()
 	{
 		return this._index;
 	}

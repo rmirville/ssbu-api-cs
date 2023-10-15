@@ -2,12 +2,12 @@ using System.Text.Json.Serialization;
 
 namespace SsbuTools.Api.Dtos.Response;
 
-public class BaseResponseWithEmbed<T> : BaseResponse
+public class BaseRestResourceWithEmbed<T> : BaseRestResource
 {
 	[JsonPropertyName("_embedded")]
 	public T Embedded { get; set; }
 	
-	public BaseResponseWithEmbed(Dictionary<string, string> links, T embedded) : base(links)
+	public BaseRestResourceWithEmbed(Dictionary<string, string> links, T embedded) : base(links)
 	{
 		Embedded = embedded;
 	}

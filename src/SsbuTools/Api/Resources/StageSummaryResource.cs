@@ -9,7 +9,7 @@ public class StageSummaryResource
 	private string _baseUrl;
 	private Dictionary<string, string> _links;
 	private IStageClassifications _entity;
-	private TypedResponse<StageSummary> _summaryResponse;
+	private RestResource<StageSummary> _summaryResponse;
 	public StageSummaryResource(StageClassifications entity, string baseUrl)
 	{
 		_entity = entity;
@@ -24,7 +24,7 @@ public class StageSummaryResource
 		};
 		
 		var summary = new StageSummary(entity.Id, entity.Name, entity.GameName);
-		_summaryResponse = new TypedResponse<StageSummary>(_links, summary);
+		_summaryResponse = new RestResource<StageSummary>(_links, summary);
 	}
 	public JsonResult ToJsonResult()
 	{

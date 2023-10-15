@@ -2,18 +2,18 @@ using System.Text.Json.Serialization;
 
 namespace SsbuTools.Api.Dtos.Response;
 
-public class BaseResponse
+public class BaseRestResource
 {
 
   [JsonPropertyName("_links")]
   public Dictionary<string, object> Links { get; set; } = new Dictionary<string, object>();
 
-  public BaseResponse(Dictionary<string, string> links)
+  public BaseRestResource(Dictionary<string, string> links)
   {
 		Links = CreateLinks(links);
   }
 
-	public static Dictionary<string, object> CreateLinks(Dictionary<string, string> links)
+	private static Dictionary<string, object> CreateLinks(Dictionary<string, string> links)
 	{
 		var linksDict = new Dictionary<string, object>();
 		foreach (var link in links)
