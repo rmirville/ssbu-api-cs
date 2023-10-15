@@ -4,6 +4,6 @@ namespace SsbuTools.Api.Responses;
 
 public class SsbuToolsResponse
 {
-	protected JsonResult _result = new JsonResult(new {});
-	public JsonResult ToJsonResult() => _result;
+	protected JsonResult Result { get; set; } = new JsonResult(new {});
+	public JsonResult ToJsonResult() => Result;
 }

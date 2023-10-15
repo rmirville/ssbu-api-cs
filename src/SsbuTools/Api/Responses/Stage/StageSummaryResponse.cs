@@ -17,6 +17,6 @@ public class StageSummaryResponse : SsbuToolsResponse
 			{"gameData", $"{stageUrl}/game-data"}
 		};
 		var summary = new StageSummary(entity.Id, entity.Name, entity.GameName);
-		_result = new JsonResult(new RestResource<StageSummary>(links, summary));
+		Result = new JsonResult(new RestResource<StageSummary>(links, summary));
 	}
 }

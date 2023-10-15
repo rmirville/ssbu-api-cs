@@ -6,9 +6,9 @@ using SsbuTools.Api.Dtos.Stage;
 using SsbuTools.Api.Options;
 using SsbuTools.Infrastructure.Repositories;
 
-namespace SsbuTools.Api.Services;
+namespace SsbuTools.Api.Models;
 
-public class StageService
+public class StageModel
 {
 	private readonly ApiOptions _config;
 	private readonly string _baseControllerUrl;
@@ -19,7 +19,7 @@ public class StageService
 	private readonly StagePieceMapSetRepository _stagePieceMapSets;
 	private readonly StageGameDatasetRepository _stageGameDatasets;
 
-	public StageService(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets, StagePieceMapSetRepository stagePieceMapSets, StageGameDatasetRepository stageGameDatasets)
+	public StageModel(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets, StagePieceMapSetRepository stagePieceMapSets, StageGameDatasetRepository stageGameDatasets)
 	{
 		_stages = stages;
 		_stageSets = stageSets;

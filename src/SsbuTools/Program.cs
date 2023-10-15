@@ -1,3 +1,4 @@
+using SsbuTools.Api.Models;
 using SsbuTools.Api.Options;
 using SsbuTools.Api.Services;
 using SsbuTools.Infrastructure.Repositories;
@@ -15,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IndexService>();
-builder.Services.AddTransient<StageService>();
+builder.Services.AddTransient<StageModel>();
 builder.Services.AddSingleton<StageClassificationsRepository>();
 builder.Services.AddSingleton<StageSetRepository>();
 builder.Services.AddSingleton<StagePieceMapSetRepository>();
