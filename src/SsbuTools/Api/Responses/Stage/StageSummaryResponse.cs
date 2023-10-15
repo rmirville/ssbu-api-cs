@@ -6,7 +6,7 @@ namespace SsbuTools.Api.Responses;
 
 public class StageSummaryResponse : SsbuToolsResponse
 {
-  private JsonResult _result;
+  private readonly JsonResult _result;
 
 	public StageSummaryResponse(IStageClassifications entity, string baseUrl)
 	{

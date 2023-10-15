@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using SsbuTools.Api.Dtos.Resource;
-using SsbuTools.Api.Services;
+using SsbuTools.Api.Options;
+using SsbuTools.Api.Responses;
 
 namespace SsbuTools.Api.Controllers;
 
@@ -10,16 +12,17 @@ namespace SsbuTools.Api.Controllers;
 public class ApiController : ControllerBase
 {
 
-	private IndexService _indexService;
+	private readonly ApiOptions _config;
+	private readonly string _path = "v2";
 
-	public ApiController(IndexService indexService)
+	public ApiController(IOptions<ApiOptions> apiOptions)
 	{
-		_indexService = indexService;
+		_config = apiOptions.Value;
 	}
 
 	[HttpGet(Name = "ApiIndex")]
 	public ActionResult<BaseRestResource> Get()
 	{
-		return _indexService.GetIndex();
+		return new ApiIndexResponse(_config.BaseUrl, _path).ToJsonResult();
 	}
 }
