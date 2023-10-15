@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Options;
 using SsbuTools.Api.Entities;
+using SsbuTools.Api.Dtos;
 using SsbuTools.Api.Dtos.Resource;
 using SsbuTools.Api.Dtos.Stage;
 using SsbuTools.Api.Options;
