@@ -9,8 +9,6 @@ namespace SsbuTools.Api.Services;
 
 public class StageService
 {
-	private BaseResponse _index;
-
 	private readonly ApiOptions _config;
 	private string _baseControllerUrl;
 	private readonly string _path = "/v2/stages";
@@ -35,7 +33,6 @@ public class StageService
 			{ "gameData", _baseControllerUrl + "/game-data" },
 			{ "pieceMaps", _baseControllerUrl + "/piece-maps" },
 		};
-		_index = new BaseResponse(_indexLinks);
 	}
 
 	public async Task<BaseResponseWithEmbed<StageSummariesEmbed>> GetAllStagesAsync()
