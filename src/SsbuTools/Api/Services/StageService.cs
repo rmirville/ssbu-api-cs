@@ -10,13 +10,13 @@ namespace SsbuTools.Api.Services;
 public class StageService
 {
 	private readonly ApiOptions _config;
-	private string _baseControllerUrl;
+	private readonly string _baseControllerUrl;
 	private readonly string _path = "/v2/stages";
-	private Dictionary<string, string> _indexLinks;
-	private StageClassificationsRepository _stages;
-	private StageSetRepository _stageSets;
-	private StagePieceMapSetRepository _stagePieceMapSets;
-	private StageGameDatasetRepository _stageGameDatasets;
+	private readonly Dictionary<string, string> _indexLinks;
+	private readonly StageClassificationsRepository _stages;
+	private readonly StageSetRepository _stageSets;
+	private readonly StagePieceMapSetRepository _stagePieceMapSets;
+	private readonly StageGameDatasetRepository _stageGameDatasets;
 
 	public StageService(IOptions<ApiOptions> config, StageClassificationsRepository stages, StageSetRepository stageSets, StagePieceMapSetRepository stagePieceMapSets, StageGameDatasetRepository stageGameDatasets)
 	{
