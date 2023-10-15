@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using SsbuTools.Api.Models.Response;
-using SsbuTools.Api.Models.Stage;
+using SsbuTools.Api.Dtos.Response;
+using SsbuTools.Api.Dtos.Stage;
 
 namespace SsbuTools.Api.Resources;
 

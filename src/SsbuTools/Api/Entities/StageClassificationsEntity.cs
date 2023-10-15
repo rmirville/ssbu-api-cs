@@ -1,6 +1,6 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using SsbuTools.Api.Models.Stage;
+using SsbuTools.Api.Dtos.Stage;
 
 namespace SsbuTools.Api.Entities;
 

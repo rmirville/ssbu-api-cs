@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 using SsbuTools.Api.Options;
-using SsbuTools.Api.Models.Response;
+using SsbuTools.Api.Dtos.Response;
 
 namespace SsbuTools.Api.Services;
 
