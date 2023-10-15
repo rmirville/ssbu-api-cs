@@ -147,7 +147,7 @@ public class StageService
 
 	public async Task<BaseResponseWithEmbed<StagePieceMapSetSummariesEmbed>> GetAllStagePieceMapSetsAsync()
 	{
-		var summaries = (await _stagePieceMapSets.GetAllStagePieceMapSetsAsync()).Select(set => IdToIdSummarySetResponse(set.Id, "piece-maps")).ToArray();
+		var summaries = (await _stagePieceMapSets.GetAllAsync()).Select(set => IdToIdSummarySetResponse(set.Id, "piece-maps")).ToArray();
 		var embedded = new StagePieceMapSetSummariesEmbed(summaries);
 		var links = new Dictionary<string, string> {
 			{ "self", $"{_baseControllerUrl}/piece-maps" },
@@ -165,7 +165,7 @@ public class StageService
 			{ "index", stagePieceMapSetPath },
 			{ "stages", _baseControllerUrl }
 		};
-		var stagePieceMapSetEntity = await _stagePieceMapSets.GetStagePieceMapSetByIdAsync(id);
+		var stagePieceMapSetEntity = await _stagePieceMapSets.GetByIdAsync(id);
 		var stagePieceMapSet = new StagePieceMapSet(stagePieceMapSetEntity);
 		return new TypedResponse<StagePieceMapSet>(links, stagePieceMapSet);
 	}

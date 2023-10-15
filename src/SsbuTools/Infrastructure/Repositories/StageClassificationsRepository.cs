@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Options;
-using MongoDB.Driver;
 using SsbuTools.Api.Options;
 using SsbuTools.Api.Entities;
 
