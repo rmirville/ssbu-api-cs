@@ -40,7 +40,7 @@ public class StageService
 
 	public async Task<BaseResponseWithEmbed<StageSummariesEmbed>> GetAllStagesAsync()
 	{
-		var summaries = (await _stages.GetAllStagesAsync()).Select(stage =>
+		var summaries = (await _stages.GetAllAsync()).Select(stage =>
 		{
 			var links = new Dictionary<string, string> {
 				{
@@ -71,7 +71,7 @@ public class StageService
 
 	public async Task<BaseResponseWithEmbed<StageClassificationsEmbed>> GetAllStageClassificationsAsync()
 	{
-		var classifications = (await _stages.GetAllStagesAsync()).Select(stage =>
+		var classifications = (await _stages.GetAllAsync()).Select(stage =>
 		{
 			var links = new Dictionary<string, string> {
 				{
@@ -131,7 +131,7 @@ public class StageService
 		Task<List<StageClassificationsEntity>> classificationsTask;
 		if (id == "all")
 		{
-			classificationsTask = _stages.GetAllStagesAsync();
+			classificationsTask = _stages.GetAllAsync();
 		}
 		else
 		{
