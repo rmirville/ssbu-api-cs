@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using SsbuTools.Api.Dtos.Response;
+using SsbuTools.Api.Dtos.Resource;
 using SsbuTools.Api.Dtos.Stage;
 
 namespace SsbuTools.Api.Resources;

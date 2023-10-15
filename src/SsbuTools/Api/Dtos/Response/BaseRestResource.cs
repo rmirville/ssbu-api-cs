@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace SsbuTools.Api.Dtos.Response;
+namespace SsbuTools.Api.Dtos.Resource;
 
 public class BaseRestResource
 {

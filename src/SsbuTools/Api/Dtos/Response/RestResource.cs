@@ -1,4 +1,4 @@
-namespace SsbuTools.Api.Dtos.Response;
+namespace SsbuTools.Api.Dtos.Resource;
 
 public class RestResource<T> : BaseRestResource
 {

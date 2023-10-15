@@ -1,4 +1,4 @@
-using SsbuTools.Api.Dtos.Response;
+using SsbuTools.Api.Dtos.Resource;
 
 namespace SsbuTools.Api.Dtos.Stage;
 
