@@ -46,7 +46,7 @@ public class StageController : BaseSsbuToolsApiController {
 	public async Task<JsonResult> GetClassificationsByIdAsync(string id)
 	{
 		var stage = await _stageModel.GetStageClassificationsByIdAsync(id);
-		return new JsonResult(stage);
+		return new StageClassificationsResponse(stage, _baseControllerUrl).ToJsonResult();
 	}
 
 	[HttpGet("classification-sets")]
