@@ -6,7 +6,7 @@ namespace SsbuTools.Api.Responses;
 
 public class StageSummaryResponse : SsbuToolsResponse
 {
-  private readonly JsonResult _result;
+	private readonly RestResource<StageSummary> _resource;
 
 	public StageSummaryResponse(IStageClassifications stage, string baseStagesUrl)
 	{
@@ -19,8 +19,8 @@ public class StageSummaryResponse : SsbuToolsResponse
 			{"gameData", $"{stageUrl}/game-data"}
 		};
 		var summary = new StageSummary(stage.Id, stage.Name, stage.GameName);
-		_result = new JsonResult(new RestResource<StageSummary>(links, summary));
+		_resource = new RestResource<StageSummary>(links, summary);
 	}
 
-  public override JsonResult ToJsonResult() => _result;
+  public override JsonResult ToJsonResult() => new JsonResult(_resource);
 }

@@ -6,7 +6,7 @@ namespace SsbuTools.Api.Responses;
 
 public class StageSummaryCollectionResponse : SsbuToolsResponse
 {
-	private readonly JsonResult _result;
+	private readonly RestResource<StageSummariesEmbed> _resource;
 	public StageSummaryCollectionResponse(List<IStageClassifications> stages, string baseStagesUrl)
 	{
 		var summaries = stages.Select(stage =>
@@ -29,8 +29,8 @@ public class StageSummaryCollectionResponse : SsbuToolsResponse
 			{ "pieceMaps", $"{baseStagesUrl}/piece-maps" },
 		};
 		
-		_result = new JsonResult(new RestResource<StageSummariesEmbed>(links, embed));
+		_resource = new RestResource<StageSummariesEmbed>(links, embed);
 	}
 
-	public override JsonResult ToJsonResult() => _result;
+	public override JsonResult ToJsonResult() => new JsonResult(_resource);
 }

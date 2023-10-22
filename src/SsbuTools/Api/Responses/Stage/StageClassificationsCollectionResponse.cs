@@ -6,7 +6,7 @@ namespace SsbuTools.Api.Responses;
 
 public class StageClassificationsCollectionResponse : SsbuToolsResponse
 {
-	private readonly JsonResult _result;
+	private readonly BaseRestResourceWithEmbed<StageSummariesEmbed> _resource;
 
 	public StageClassificationsCollectionResponse(List<IStageClassifications> stages, string baseStagesUrl)
 	{
@@ -24,7 +24,7 @@ public class StageClassificationsCollectionResponse : SsbuToolsResponse
 			{ "self", $"{baseStagesUrl}/classifications" },
 			{ "index", baseStagesUrl },
 		};
-		_result = new JsonResult(new BaseRestResourceWithEmbed<StageSummariesEmbed>(links, embed));
+		_resource = new BaseRestResourceWithEmbed<StageSummariesEmbed>(links, embed);
 	}
-	public override JsonResult ToJsonResult() => _result;
+	public override JsonResult ToJsonResult() => new JsonResult(_resource);
 }
