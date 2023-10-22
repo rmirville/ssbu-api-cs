@@ -4,7 +4,7 @@ using SsbuTools.Api.Dtos.Resource;
 
 namespace SsbuTools.Api.Responses;
 
-public class IdSummaryResponse : SsbuToolsResponse
+public class IdSummaryResponse : IRestResponse<RestResource<IdSummary>>
 {
 	public RestResource<IdSummary> Resource { get; init; }
 
@@ -16,5 +16,5 @@ public class IdSummaryResponse : SsbuToolsResponse
 		Resource = new RestResource<IdSummary>(links, new IdSummary(id));
 	}
 
-	public override JsonResult ToJsonResult() => new JsonResult(Resource);
+	public JsonResult ToJsonResult() => new JsonResult(Resource);
 }

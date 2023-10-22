@@ -4,9 +4,9 @@ using SsbuTools.Api.Dtos.Stage;
 
 namespace SsbuTools.Api.Responses;
 
-public class StageSetCollectionResponse : SsbuToolsResponse
+public class StageSetCollectionResponse : IRestResponse<BaseRestResourceWithEmbed<StageClassificationsSetSummariesEmbed>>
 {
-	private readonly BaseRestResourceWithEmbed<StageClassificationsSetSummariesEmbed> _resource;
+	public BaseRestResourceWithEmbed<StageClassificationsSetSummariesEmbed> Resource { get; init; }
 	public StageSetCollectionResponse(List<IStageSet> stageSets, string baseStagesUrl)
 	{
 		var summaries = stageSets.Select(set =>
@@ -18,8 +18,8 @@ public class StageSetCollectionResponse : SsbuToolsResponse
 			{ "index", baseStagesUrl }
 		};
 		var embed = new StageClassificationsSetSummariesEmbed(summaries);
-		_resource = new BaseRestResourceWithEmbed<StageClassificationsSetSummariesEmbed>(links, embed);
+		Resource = new BaseRestResourceWithEmbed<StageClassificationsSetSummariesEmbed>(links, embed);
 	}
 
-	public override JsonResult ToJsonResult() => new JsonResult(_resource);
+	public JsonResult ToJsonResult() => new JsonResult(Resource);
 }

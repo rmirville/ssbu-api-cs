@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using SsbuTools.Api.Dtos.Resource;
+
 namespace SsbuTools.Api.Responses;
-public class ApiIndexResponse : SsbuToolsResponse
+
+public class ApiIndexResponse : IRestResponse<BaseRestResource>
 {
-	private readonly JsonResult _result;
+	public BaseRestResource Resource { get; init; }
+
 	public ApiIndexResponse(string hostname, string apiPath) {
 		var baseUrl = $"{hostname}/{apiPath}";
 		var links = new Dictionary<string, string> {
@@ -11,8 +14,8 @@ public class ApiIndexResponse : SsbuToolsResponse
 			{ "stages", $"{baseUrl}/stages" },
 			{ "docs", $"{hostname}/swagger" }
 		};
-		_result = new JsonResult(new BaseRestResource(links));
+		Resource = new BaseRestResource(links);
 	}
 
-	public override JsonResult ToJsonResult() => _result;
+	public JsonResult ToJsonResult() => new JsonResult(Resource);
 }

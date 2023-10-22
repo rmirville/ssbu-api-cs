@@ -4,9 +4,10 @@ using SsbuTools.Api.Dtos.Stage;
 
 namespace SsbuTools.Api.Responses;
 
-public class StageSummaryCollectionResponse : SsbuToolsResponse
+public class StageSummaryCollectionResponse : IRestResponse<RestResource<StageSummariesEmbed>>
 {
-	private readonly RestResource<StageSummariesEmbed> _resource;
+	public RestResource<StageSummariesEmbed> Resource { get; init; }
+
 	public StageSummaryCollectionResponse(List<IStageClassifications> stages, string baseStagesUrl)
 	{
 		var summaries = stages.Select(stage =>
@@ -29,8 +30,8 @@ public class StageSummaryCollectionResponse : SsbuToolsResponse
 			{ "pieceMaps", $"{baseStagesUrl}/piece-maps" },
 		};
 		
-		_resource = new RestResource<StageSummariesEmbed>(links, embed);
+		Resource = new RestResource<StageSummariesEmbed>(links, embed);
 	}
 
-	public override JsonResult ToJsonResult() => new JsonResult(_resource);
+	public JsonResult ToJsonResult() => new JsonResult(Resource);
 }

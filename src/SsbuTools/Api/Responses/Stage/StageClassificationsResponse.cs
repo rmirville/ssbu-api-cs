@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using SsbuTools.Api.Dtos.Resource;
 using SsbuTools.Api.Dtos.Stage;
 
-public class StageClassificationsResponse : SsbuToolsResponse
+public class StageClassificationsResponse : IRestResponse<RestResource<StageClassifications>>
 {
-	private readonly RestResource<StageClassifications> _resource;
+	public RestResource<StageClassifications> Resource { get; init; }
 
 	public StageClassificationsResponse(IStageClassifications stage, string baseStagesUrl)
 	{
@@ -17,8 +17,8 @@ public class StageClassificationsResponse : SsbuToolsResponse
 			{"stages", baseStagesUrl}
 		};
 		var classifications = new StageClassifications(stage);
-		_resource = new RestResource<StageClassifications>(links, classifications);
+		Resource = new RestResource<StageClassifications>(links, classifications);
 	}
 
-	public override JsonResult ToJsonResult() => new JsonResult(_resource);
+	public JsonResult ToJsonResult() => new JsonResult(Resource);
 }
