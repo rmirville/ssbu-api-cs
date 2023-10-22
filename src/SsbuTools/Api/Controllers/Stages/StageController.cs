@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using SsbuTools.Api.Dtos.Stage;
 using SsbuTools.Api.Models;
 using SsbuTools.Api.Options;
 using SsbuTools.Api.Responses;
@@ -24,8 +25,8 @@ public class StageController : BaseSsbuToolsApiController {
 
 	[HttpGet(Name = "StageIndex")]
 	public async Task<JsonResult> GetAsync() {
-		var stages = await _stageModel.GetAllStagesAsync();
-		return new JsonResult(stages);
+		var stages = (await _stageModel.GetAllStagesAsync()).ToList<IStageClassifications>();
+		return new StageSummaryCollectionResponse(stages, _baseControllerUrl).ToJsonResult();
 	}
 	[HttpGet("{id}")]
 	public async Task<JsonResult> GetByIdAsync(string id)

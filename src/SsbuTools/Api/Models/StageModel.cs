@@ -36,20 +36,9 @@ public class StageModel
 		};
 	}
 
-	public async Task<BaseRestResourceWithEmbed<StageSummariesEmbed>> GetAllStagesAsync()
+	public async Task<List<StageClassificationsEntity>> GetAllStagesAsync()
 	{
-		var summaries = (await _stages.GetAllAsync()).Select(stage =>
-		{
-			var links = new Dictionary<string, string> {
-				{
-					"self", $"{_baseControllerUrl}/{stage.Id}"
-				}
-			};
-			return new RestResource<StageSummary>(links, new StageSummary(stage));
-		}
-		).ToArray();
-		var embedded = new StageSummariesEmbed(summaries);
-		return new BaseRestResourceWithEmbed<StageSummariesEmbed>(_indexLinks, embedded);
+		return await _stages.GetAllAsync();
 	}
 
   public Task<StageClassificationsEntity> GetStageByIdAsync(string id) => _stages.GetByIdAsync(id);
