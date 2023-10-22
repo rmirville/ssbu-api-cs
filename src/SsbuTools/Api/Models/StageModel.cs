@@ -43,24 +43,9 @@ public class StageModel
 
   public Task<StageClassificationsEntity> GetStageByIdAsync(string id) => _stages.GetByIdAsync(id);
 
-	public async Task<BaseRestResourceWithEmbed<StageClassificationsEmbed>> GetAllStageClassificationsAsync()
+	public async Task<List<StageClassificationsEntity>> GetAllStageClassificationsAsync()
 	{
-		var classifications = (await _stages.GetAllAsync()).Select(stage =>
-		{
-			var links = new Dictionary<string, string> {
-				{
-					"self", $"{_baseControllerUrl}/{stage.Id}/classifications"
-				}
-			};
-			return new RestResource<StageClassifications>(links, new StageClassifications(stage));
-		}
-		).ToArray();
-		var embedded = new StageClassificationsEmbed(classifications);
-		var links = new Dictionary<string, string> {
-			{ "self", _baseControllerUrl + "/classifications" },
-			{ "index", _baseControllerUrl },
-		};
-		return new BaseRestResourceWithEmbed<StageClassificationsEmbed>(links, embedded);
+		return await _stages.GetAllAsync();
 	}
 
 	public async Task<RestResource<StageClassifications>> GetStageClassificationsByIdAsync(string id)
