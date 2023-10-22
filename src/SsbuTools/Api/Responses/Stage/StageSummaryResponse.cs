@@ -13,9 +13,9 @@ public class StageSummaryResponse : SsbuToolsResponse
 		var stageUrl = $"{baseStagesUrl}/{stage.Id}";
 		var links = new Dictionary<string, string>
 		{
-			{"index", $"{baseStagesUrl}/classifications"},
-			{"stage", stageUrl},
-			{"self", $"{stageUrl}/classifications"},
+			{"self", stageUrl},
+			{"index", baseStagesUrl},
+			{"classifications", $"{stageUrl}/classifications"},
 			{"gameData", $"{stageUrl}/game-data"}
 		};
 		var summary = new StageSummary(stage.Id, stage.Name, stage.GameName);
