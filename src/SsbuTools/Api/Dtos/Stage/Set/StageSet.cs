@@ -3,9 +3,9 @@ namespace SsbuTools.Api.Dtos.Stage;
 public class StageSet : IStageSet
 {
 	public string Id { get; set; }
-	public string[] Stages { get; set; }
+	public List<string> Stages { get; set; }
 
-	public StageSet(string id, string[] stages)
+	public StageSet(string id, List<string> stages)
 	{
 		Id = id;
 		Stages = stages;

@@ -8,5 +8,5 @@ namespace SsbuTools.Api.Entities;
 public class StageSetEntity : MongoEntity, IStageSet
 {
 	[BsonElement("stages")]
-	public string[] Stages { get; set; } = Array.Empty<string>();
+	public List<string> Stages { get; set; } = new List<string>();
 }

@@ -52,20 +52,12 @@ public class StageModel
 	{
 		return await _stages.GetByIdAsync(id);
 	}
-	public async Task<BaseRestResourceWithEmbed<StageClassificationsSetSummariesEmbed>> GetAllStageSetsAsync()
+	public async Task<List<StageSetEntity>> GetAllStageSetsAsync()
 	{
-		var summaries = (await _stageSets.GetAllStageSetsAsync()).Select(set =>
-		{
-			return IdToIdSummarySetResponse(set.Id, "classification-sets");
-		}
-		).Append(IdToIdSummarySetResponse("all", "classification-sets"))
-		.ToArray();
-		var embedded = new StageClassificationsSetSummariesEmbed(summaries);
-		var links = new Dictionary<string, string> {
-			{ "self", $"{_baseControllerUrl}/classification-sets" },
-			{ "index", _baseControllerUrl }
-		};
-		return new BaseRestResourceWithEmbed<StageClassificationsSetSummariesEmbed>(links, embedded);
+		var allStages = (await _stages.GetAllAsync()).Select(stage => stage.Id).ToList();
+		var allSet = new StageSetEntity { Id = "all", Stages =allStages };
+		var summaries = (await _stageSets.GetAllStageSetsAsync()).Append(allSet).ToList();
+		return summaries;
 	}
 
 	public async Task<RestResource<StageClassificationsSet>> GetStageSetByIdAsync(string id)
