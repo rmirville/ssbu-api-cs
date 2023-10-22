@@ -8,17 +8,17 @@ public class StageSummaryResponse : SsbuToolsResponse
 {
   private readonly JsonResult _result;
 
-	public StageSummaryResponse(IStageClassifications entity, string baseUrl)
+	public StageSummaryResponse(IStageClassifications stage, string baseStagesUrl)
 	{
-		var stageUrl = $"{baseUrl}/{entity.Id}";
+		var stageUrl = $"{baseStagesUrl}/{stage.Id}";
 		var links = new Dictionary<string, string>
 		{
-			{"index", $"{baseUrl}/classifications"},
+			{"index", $"{baseStagesUrl}/classifications"},
 			{"stage", stageUrl},
 			{"self", $"{stageUrl}/classifications"},
 			{"gameData", $"{stageUrl}/game-data"}
 		};
-		var summary = new StageSummary(entity.Id, entity.Name, entity.GameName);
+		var summary = new StageSummary(stage.Id, stage.Name, stage.GameName);
 		_result = new JsonResult(new RestResource<StageSummary>(links, summary));
 	}
 
