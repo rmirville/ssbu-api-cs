@@ -7,9 +7,9 @@ namespace SsbuTools.Api.Responses;
 public class StageSummaryCollectionResponse : SsbuToolsResponse
 {
 	private readonly JsonResult _result;
-	public StageSummaryCollectionResponse(List<IStageClassifications> collection, string baseStagesUrl)
+	public StageSummaryCollectionResponse(List<IStageClassifications> stages, string baseStagesUrl)
 	{
-		var summaries = collection.Select(stage =>
+		var summaries = stages.Select(stage =>
 		{
 			var links = new Dictionary<string, string> {
 				{
