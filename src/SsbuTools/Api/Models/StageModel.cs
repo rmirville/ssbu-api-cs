@@ -83,17 +83,9 @@ public class StageModel
 		return await _stagePieceMapSets.GetAllAsync();
 	}
 
-  public async Task<RestResource<StagePieceMapSet>> GetStagePieceMapSetByIdAsync(string id)
+  public async Task<StagePieceMapSetEntity> GetStagePieceMapSetByIdAsync(string id)
 	{
-		var stagePieceMapSetPath = $"{_baseControllerUrl}/piece-maps";
-		var links = new Dictionary<string, string> {
-			{ "self", stagePieceMapSetPath + $"/{id}" },
-			{ "index", stagePieceMapSetPath },
-			{ "stages", _baseControllerUrl }
-		};
-		var stagePieceMapSetEntity = await _stagePieceMapSets.GetByIdAsync(id);
-		var stagePieceMapSet = new StagePieceMapSet(stagePieceMapSetEntity);
-		return new RestResource<StagePieceMapSet>(links, stagePieceMapSet);
+		return await _stagePieceMapSets.GetByIdAsync(id);
 	}
 
 	public async Task<BaseRestResourceWithEmbed<StageGameDatasetSummariesEmbed>> GetAllStageGameDatasetsAsync()
