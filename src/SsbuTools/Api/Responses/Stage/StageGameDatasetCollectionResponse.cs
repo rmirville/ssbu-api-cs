@@ -14,7 +14,7 @@ public class StageGameDatasetCollectionResponse : IRestResponse<BaseRestResource
 		var summaries = datasets.Select(dataset => {
 			var links = new Dictionary<string, string> {
 				{
-					"self", $"{baseStagesUrl}/game-data/{dataset.Id}"
+					"self", $"{baseStagesUrl}/{dataset.Id}/game-data"
 				}
 			};
 			var summary = new StageGameDatasetSummary(dataset.Id, dataset.Data[0].Name);

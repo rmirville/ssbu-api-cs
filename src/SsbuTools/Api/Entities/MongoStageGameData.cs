@@ -1,8 +1,9 @@
 using MongoDB.Bson.Serialization.Attributes;
+using SsbuTools.Api.Dtos.Stage;
 
-namespace SsbuTools.Api.Dtos.Stage;
+namespace SsbuTools.Api.Entities;
 
-public class StageGameData : IStageGameData
+public class MongoStageGameData : IStageGameData
 {
 	[BsonElement("stage")]
 	public string Stage { get; set; }
@@ -37,7 +38,7 @@ public class StageGameData : IStageGameData
 	[BsonElement("items")]
 	public List<object> Items	{ get; set; } = new List<object>();
 
-	public StageGameData(
+	public MongoStageGameData(
 		string stage,
 		string name,
 		string lvd, List<object> collisions,
@@ -63,7 +64,7 @@ public class StageGameData : IStageGameData
 		Items = items;
 	}
 
-	public StageGameData(IStageGameData data)
+	public MongoStageGameData(IStageGameData data)
 	{
 		Stage = data.Stage;
 		Name = data.Name;

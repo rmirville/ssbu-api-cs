@@ -5,8 +5,8 @@ using SsbuTools.Api.Dtos.Stage;
 namespace SsbuTools.Api.Entities;
 
 [BsonIgnoreExtraElements]
-public class StageGameDatasetEntity : MongoEntity
+public class StageGameDatasetEntity : MongoEntity, IStageGameDataset
 {
 	[BsonElement("data")]
-	public List<StageGameData> Data { get; set; } = new List<StageGameData>();
+	public List<MongoStageGameData> Data { get; set; } = new List<MongoStageGameData>();
 }

@@ -83,4 +83,11 @@ public class StageController : BaseSsbuToolsApiController {
 		var gameDatasets = await _stageModel.GetAllStageGameDatasetsAsync();
 		return new StageGameDatasetCollectionResponse(gameDatasets, _baseControllerUrl).ToJsonResult();
 	}
+
+	[HttpGet("{id}/game-data")]
+	public async Task<JsonResult> GetStageGameDatasetByIdAsync(string id)
+	{
+		var gameDataset = await _stageModel.GetStageGameDataByIdAsync(id);
+		return new StageGameDatasetResponse(gameDataset, _baseControllerUrl).ToJsonResult();
+	}
 }

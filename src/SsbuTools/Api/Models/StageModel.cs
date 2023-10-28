@@ -90,4 +90,9 @@ public class StageModel
 	{
 		return await _stageGameDatasets.GetAllAsync();
 	}
+
+	public async Task<StageGameDatasetEntity> GetStageGameDataByIdAsync(string id)
+	{
+		return await _stageGameDatasets.GetByIdAsync(id);
+	}
 }
