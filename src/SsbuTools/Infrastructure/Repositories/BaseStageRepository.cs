@@ -31,18 +31,18 @@ public abstract class BaseStageRepository<TEntity> where TEntity : MongoEntity
 		Collection = Database.GetCollection<TEntity>(CollectionName);
 	}
 
-	public async Task<List<TEntity>> GetAllAsync()
+	public Task<List<TEntity>> GetAllAsync()
 	{
-		return await Collection.Find(FilterDefinition<TEntity>.Empty).ToListAsync();
+		return Collection.Find(FilterDefinition<TEntity>.Empty).ToListAsync();
 	}
 
-	public async Task<TEntity> GetByIdAsync(string id)
+	public Task<TEntity> GetByIdAsync(string id)
 	{
-		return await Collection.Find(set => set.Id == id).FirstOrDefaultAsync();
+		return Collection.Find(set => set.Id == id).FirstOrDefaultAsync();
 	}
 
-	public async Task<List<TEntity>> GetManyByIdsAsync(List<string> ids)
+	public Task<List<TEntity>> GetManyByIdsAsync(List<string> ids)
 	{
-		return await Collection.Find(entity => ids.Contains(entity.Id)).ToListAsync();
+		return Collection.Find(entity => ids.Contains(entity.Id)).ToListAsync();
 	}
 }

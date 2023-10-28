@@ -34,26 +34,26 @@ public class StageModel
 		};
 	}
 
-	public async Task<List<StageClassificationsEntity>> GetAllStagesAsync()
+	public Task<List<StageClassificationsEntity>> GetAllStagesAsync()
 	{
-		return await _stages.GetAllAsync();
+		return _stages.GetAllAsync();
 	}
 
   public Task<StageClassificationsEntity> GetStageByIdAsync(string id) => _stages.GetByIdAsync(id);
 
-	public async Task<List<StageClassificationsEntity>> GetAllStageClassificationsAsync()
+	public Task<List<StageClassificationsEntity>> GetAllStageClassificationsAsync()
 	{
-		return await _stages.GetAllAsync();
+		return _stages.GetAllAsync();
 	}
 
-	public async Task<StageClassificationsEntity> GetStageClassificationsByIdAsync(string id)
+	public Task<StageClassificationsEntity> GetStageClassificationsByIdAsync(string id)
 	{
-		return await _stages.GetByIdAsync(id);
+		return _stages.GetByIdAsync(id);
 	}
 	public async Task<List<StageSetEntity>> GetAllStageSetsAsync()
 	{
 		var allStages = (await _stages.GetAllAsync()).Select(stage => stage.Id).ToList();
-		var allSet = new StageSetEntity { Id = "all", Stages =allStages };
+		var allSet = new StageSetEntity { Id = "all", Stages = allStages };
 		var summaries = (await _stageSets.GetAllStageSetsAsync()).Append(allSet).ToList();
 		return summaries;
 	}
@@ -76,23 +76,23 @@ public class StageModel
 		return new StageClassificationsSet(id, classifications);
 	}
 
-	public async Task<List<StagePieceMapSetEntity>> GetAllStagePieceMapSetsAsync()
+	public Task<List<StagePieceMapSetEntity>> GetAllStagePieceMapSetsAsync()
 	{
-		return await _stagePieceMapSets.GetAllAsync();
+		return _stagePieceMapSets.GetAllAsync();
 	}
 
-  public async Task<StagePieceMapSetEntity> GetStagePieceMapSetByIdAsync(string id)
+  public Task<StagePieceMapSetEntity> GetStagePieceMapSetByIdAsync(string id)
 	{
-		return await _stagePieceMapSets.GetByIdAsync(id);
+		return _stagePieceMapSets.GetByIdAsync(id);
 	}
 
-	public async Task<List<StageGameDatasetEntity>> GetAllStageGameDatasetsAsync()
+	public Task<List<StageGameDatasetEntity>> GetAllStageGameDatasetsAsync()
 	{
-		return await _stageGameDatasets.GetAllAsync();
+		return _stageGameDatasets.GetAllAsync();
 	}
 
-	public async Task<StageGameDatasetEntity> GetStageGameDataByIdAsync(string id)
+	public Task<StageGameDatasetEntity> GetStageGameDataByIdAsync(string id)
 	{
-		return await _stageGameDatasets.GetByIdAsync(id);
+		return _stageGameDatasets.GetByIdAsync(id);
 	}
 }
