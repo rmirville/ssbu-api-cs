@@ -5,11 +5,11 @@ using SsbuTools.Api.Entities;
 
 namespace SsbuTools.Api.Responses;
 
-public class StagePieceMapCollectionResponse : IRestResponse<BaseRestResourceWithEmbed<StagePieceMapSetSummariesEmbed>>
+public class StagePieceMapSetCollectionResponse : IRestResponse<BaseRestResourceWithEmbed<StagePieceMapSetSummariesEmbed>>
 {
 	public BaseRestResourceWithEmbed<StagePieceMapSetSummariesEmbed> Resource { get; init; }
 
-	public StagePieceMapCollectionResponse(List<StagePieceMapSetEntity> sets, string baseStagesUrl)
+	public StagePieceMapSetCollectionResponse(List<StagePieceMapSetEntity> sets, string baseStagesUrl)
 	{
 		var pieceMapResponses = sets.Select(set => new IdSummaryResponse(set.Id, "piece-maps", baseStagesUrl).Resource).ToArray();
 		var embed = new StagePieceMapSetSummariesEmbed(pieceMapResponses);
