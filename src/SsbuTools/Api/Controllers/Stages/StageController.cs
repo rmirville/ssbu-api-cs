@@ -67,7 +67,7 @@ public class StageController : BaseSsbuToolsApiController {
 	public async Task<JsonResult> GetAllStagePieceMapSetsAsync()
 	{
 		var pieceMapSets = await _stageModel.GetAllStagePieceMapSetsAsync();
-		return new JsonResult(pieceMapSets);
+		return new StagePieceMapCollectionResponse(pieceMapSets, _baseControllerUrl).ToJsonResult();
 	}
 
 	[HttpGet("piece-maps/{id}")]

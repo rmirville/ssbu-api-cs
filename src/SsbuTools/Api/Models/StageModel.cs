@@ -78,16 +78,9 @@ public class StageModel
 		return new StageClassificationsSet(id, classifications);
 	}
 
-	public async Task<BaseRestResourceWithEmbed<StagePieceMapSetSummariesEmbed>> GetAllStagePieceMapSetsAsync()
+	public async Task<List<StagePieceMapSetEntity>> GetAllStagePieceMapSetsAsync()
 	{
-		var summaries = (await _stagePieceMapSets.GetAllAsync()).Select(set => IdToIdSummarySetResponse(set.Id, "piece-maps")).ToArray();
-		var embedded = new StagePieceMapSetSummariesEmbed(summaries);
-		var links = new Dictionary<string, string> {
-			{ "self", $"{_baseControllerUrl}/piece-maps" },
-			{ "index", _baseControllerUrl }
-		};
-
-		return new BaseRestResourceWithEmbed<StagePieceMapSetSummariesEmbed>(links, embedded);
+		return await _stagePieceMapSets.GetAllAsync();
 	}
 
   public async Task<RestResource<StagePieceMapSet>> GetStagePieceMapSetByIdAsync(string id)
@@ -120,15 +113,5 @@ public class StageModel
 			{ "index", _baseControllerUrl }
 		};
 		return new BaseRestResourceWithEmbed<StageGameDatasetSummariesEmbed>(links, embedded);
-	}
-
-	private RestResource<IdSummary> IdToIdSummarySetResponse(string id, string path = "")
-	{
-		var embeddedLinks = new Dictionary<string, string> {
-				{
-					"self", $"{_baseControllerUrl}/{path}/{id}"
-				}
-			};
-		return new RestResource<IdSummary>(embeddedLinks, new IdSummary(id));
 	}
 }
