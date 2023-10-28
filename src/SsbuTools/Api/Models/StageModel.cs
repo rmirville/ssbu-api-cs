@@ -1,7 +1,5 @@
 using Microsoft.Extensions.Options;
 using SsbuTools.Api.Entities;
-using SsbuTools.Api.Dtos;
-using SsbuTools.Api.Dtos.Resource;
 using SsbuTools.Api.Dtos.Stage;
 using SsbuTools.Api.Options;
 using SsbuTools.Infrastructure.Repositories;
@@ -88,22 +86,8 @@ public class StageModel
 		return await _stagePieceMapSets.GetByIdAsync(id);
 	}
 
-	public async Task<BaseRestResourceWithEmbed<StageGameDatasetSummariesEmbed>> GetAllStageGameDatasetsAsync()
+	public async Task<List<StageGameDatasetEntity>> GetAllStageGameDatasetsAsync()
 	{
-		var summaries = (await _stageGameDatasets.GetAllAsync()).Select(dataset => {
-			var links = new Dictionary<string, string> {
-				{
-					"self", $"{_baseControllerUrl}/game-data/{dataset.Id}"
-				}
-			};
-			var summary = new StageGameDatasetSummary(dataset.Id, dataset.Data[0].Name);
-			return new RestResource<StageGameDatasetSummary>(links, summary);
-		}).ToArray();
-		var embedded = new StageGameDatasetSummariesEmbed(summaries);
-		var links = new Dictionary<string, string> {
-			{ "self", $"{_baseControllerUrl}/game-data" },
-			{ "index", _baseControllerUrl }
-		};
-		return new BaseRestResourceWithEmbed<StageGameDatasetSummariesEmbed>(links, embedded);
+		return await _stageGameDatasets.GetAllAsync();
 	}
 }
