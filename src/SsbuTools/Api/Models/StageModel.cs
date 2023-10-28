@@ -60,16 +60,8 @@ public class StageModel
 		return summaries;
 	}
 
-	public async Task<RestResource<StageClassificationsSet>> GetStageSetByIdAsync(string id)
+	public async Task<StageClassificationsSet> GetStageSetByIdAsync(string id)
 	{
-		var stageSetPath = $"{_baseControllerUrl}/classification-sets";
-		var links = new Dictionary<string, string>
-		{
-			{ "self", stageSetPath + $"/{id}" },
-			{ "index", stageSetPath },
-			{ "stages", _baseControllerUrl }
-		};
-
 		Task<List<StageClassificationsEntity>> classificationsTask;
 		if (id == "all")
 		{
@@ -83,8 +75,7 @@ public class StageModel
 		var classifications = (await classificationsTask)
 			.Select(classifications => new StageClassifications(classifications))
 			.ToArray();
-		var classificationsSet = new StageClassificationsSet(id, classifications);
-		return new RestResource<StageClassificationsSet>(links, classificationsSet);
+		return new StageClassificationsSet(id, classifications);
 	}
 
 	public async Task<BaseRestResourceWithEmbed<StagePieceMapSetSummariesEmbed>> GetAllStagePieceMapSetsAsync()

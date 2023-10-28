@@ -60,7 +60,7 @@ public class StageController : BaseSsbuToolsApiController {
 	public async Task<JsonResult> GetStageClassificationsSetByIdAsync(string id)
 	{
 		var stageSet = await _stageModel.GetStageSetByIdAsync(id);
-		return new JsonResult(stageSet);
+		return new StageClassificationsSetResponse(stageSet, _baseControllerUrl).ToJsonResult();
 	}
 
 	[HttpGet("piece-maps")]

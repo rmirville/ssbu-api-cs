@@ -1,7 +1,8 @@
-namespace SsbuTools.Api.Responses;
 using Microsoft.AspNetCore.Mvc;
 using SsbuTools.Api.Dtos.Resource;
 using SsbuTools.Api.Dtos.Stage;
+
+namespace SsbuTools.Api.Responses;
 
 public class StageClassificationsResponse : IRestResponse<RestResource<StageClassifications>>
 {
