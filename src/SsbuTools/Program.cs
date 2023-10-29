@@ -33,6 +33,8 @@ else
 	app.UseHttpsRedirection();
 }
 
+app.UseExceptionHandler("/v2/error");
+
 app.UseAuthorization();
 
 app.MapControllers();
