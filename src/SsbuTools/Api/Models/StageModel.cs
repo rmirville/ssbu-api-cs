@@ -54,7 +54,7 @@ public class StageModel
 	{
 		var allStages = (await _stages.GetAllAsync()).Select(stage => stage.Id).ToList();
 		var allSet = new StageSetEntity { Id = "all", Stages = allStages };
-		var summaries = (await _stageSets.GetAllStageSetsAsync()).Append(allSet).ToList();
+		var summaries = (await _stageSets.GetAllAsync()).Append(allSet).ToList();
 		return summaries;
 	}
 
@@ -67,7 +67,7 @@ public class StageModel
 		}
 		else
 		{
-			var stageSet = await _stageSets.GetStageSetByIdAsync(id);
+			var stageSet = await _stageSets.GetByIdAsync(id);
 			classificationsTask = _stages.GetManyByIdsAsync(stageSet.Stages);
 		}
 		var classifications = (await classificationsTask)

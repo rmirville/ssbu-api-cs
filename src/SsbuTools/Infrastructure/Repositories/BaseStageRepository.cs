@@ -38,7 +38,7 @@ public abstract class BaseStageRepository<TEntity> where TEntity : MongoEntity
 
 	public Task<TEntity> GetByIdAsync(string id)
 	{
-		return Collection.Find(set => set.Id == id).FirstOrDefaultAsync();
+		return Collection.Find(entity => entity.Id == id).FirstOrDefaultAsync();
 	}
 
 	public Task<List<TEntity>> GetManyByIdsAsync(List<string> ids)
